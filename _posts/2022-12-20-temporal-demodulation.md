@@ -14,8 +14,8 @@ C_{r's'} = \frac{\phi_{r's'}}{\sqrt{\phi_{r'r'}\phi_{s's'}}}
 \end{equation}
 {% endhighlight %}
 
-![Image](/assets/Envelope_comparisions.svg){: style="float: left"}
-Comparison of the cross-coherence feature against traditional envelope features for a normal PCG recording.
+![Image](/assets/Envelope_comparisions.svg){description="Comparison of the cross-coherence feature against traditional envelope features for a normal PCG recording."}
+
 
 ![Image](/assets/Envelope_comparisions_408.svg){: style="float: left"}
 Comparison of the cross-coherence feature against traditional envelope features for a PCG with inconsistent sound amplitudes.
