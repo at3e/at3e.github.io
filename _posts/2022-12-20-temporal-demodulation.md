@@ -19,21 +19,30 @@ C_{r's'} = \frac{\phi_{r's'}}{\sqrt{\phi_{r'r'}\phi_{s's'}}}
 *Comparison of the cross-coherence feature against traditional envelope features for a PCG with inconsistent sound amplitudes.*
 
 where  $ \phi_{r's'} $ is the cross-spectrum of the signals, $ \phi_{r'r'} $ and $ \phi_{s's'} $ are the respective PSDs. The Welch algorithm estimates the cross-spectrum algorithm. 
-{% pseudo %}
-Function swap(old, new)
-  remaining <- quorumSize
-  success <- False
-  For Each host
-    result[host] <- send(host, propose(old, new))
-    If result[host] = "ok"
-      remaining--
 
-  If remaining > 1+quorumSize/2
-    success <- True
-
-  For Each result
-    If success
-      send(host, confirm(old, new))
-    Else
-      send(host, cancel(old, new))
-{% endpseudo %}
+{% highlight ruby %}
+   <b>Input</b>: Window length w, sampling frequency f_s.
+    \textbf{Output:} C of dimension.
+    \STATE \textbf{Local:} Length of signal $l_s$, hop-length $h$, number of frames $N_w$, filter length $l_f$\\
+    \STATE $N_w \leftarrow \textsc{ceil}(l_s/ h) $ \\
+    \STATE $s \leftarrow \textsc{PadZeros}(s, (w/2, w/2)) $ \\
+    \STATE $l_f \leftarrow \textsc{round}(0.03*f_s) $ \\
+    \STATE $n_s \leftarrow \textsc{round}(f_s/20) $ \\
+    \STATE $ [t_{p_n}] \leftarrow \textsc{ComputeReferenceFrame}(r, w, h, l_f) $ \\
+    \STATE $ C \leftarrow \textsc{zeros}((\textsc{round}(N_w+1), n_s/2+1)) $ \\
+    \STATE $ \textbf{for} \hspace{0.5em} t_{p_n} \in \{ t_{p_2}, t_{p_{N-1}} \} $ \\
+    \STATE \quad $C' \leftarrow \textsc{zeros}((\textsc{round}(N_w+1), n_s/2+1))$ \\
+    \STATE \quad $ \textbf{for} \hspace{0.5em} t \in [t_{p_n}-n, t_{p_n}+n] $ \\
+    \STATE \qquad $ C_t \leftarrow \{ \} $ \\
+    \STATE \qquad $ \textbf{for} \hspace{0.5em} N \in [0, \textsc{round}(N_w+1)) $ \\
+    \STATE \quad \qquad $ r' = r[t*h-(w/2): t*h+(w/2)]  $ \\
+    \STATE \quad \qquad $ s' = s[N*h: N*h+w] $ \\
+    \STATE \quad \qquad $ f, C_{rs} = \textsc{Coherence}(r', s', N_{\text{fft}}, n_s) $ \\
+    \STATE \quad \qquad $ C_{xy} = \textsc{GaussianFilter1d}(C_{xy}, \sigma) $ \\
+    \STATE \quad \qquad $ C'_t \leftarrow C_{rs} $ \\
+    \STATE \quad \qquad $ C'_t \leftarrow \textsc{Threshold}(C_t', p) $ \\
+    \STATE \quad \qquad $ C' \leftarrow C' + C'_t $ \\
+    \STATE \qquad $ C \leftarrow C + \textsc{Normalize}(C')$ \\
+    \STATE \textbf{Return} C 
+{% endhighlight %}
+  
