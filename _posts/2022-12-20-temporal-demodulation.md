@@ -21,10 +21,10 @@ C_{r's'} = \frac{\phi_{r's'}}{\sqrt{\phi_{r'r'}\phi_{s's'}}}
 where  $ \phi_{r's'} $ is the cross-spectrum of the signals, $ \phi_{r'r'} $ and $ \phi_{s's'} $ are the respective PSDs. The Welch algorithm estimates the cross-spectrum algorithm. 
 
 {% highlight ruby %}
-   **Input** : Window length w, sampling frequency f_s.
-    \textbf{Output:} C of dimension.
-    \STATE \textbf{Local:} Length of signal $l_s$, hop-length $h$, number of frames $N_w$, filter length $l_f$\\
-    \STATE $N_w \leftarrow \textsc{ceil}(l_s/ h) $ \\
+    Input: Window length w, sampling frequency f_s.
+    Output: C of dimension.
+    Local: Length of signal l_s, hop-length h, number of frames N_w, filter length l_f
+           N_w → (l_s/ h)
     \STATE $s \leftarrow \textsc{PadZeros}(s, (w/2, w/2)) $ \\
     \STATE $l_f \leftarrow \textsc{round}(0.03*f_s) $ \\
     \STATE $n_s \leftarrow \textsc{round}(f_s/20) $ \\
