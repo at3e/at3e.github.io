@@ -24,7 +24,7 @@ where  $ \phi_{r's'} $ is the cross-spectrum of the signals, $ \phi_{r'r'} $ and
     **Input**: Window length w, sampling frequency f_s.
     Output: C of dimension.
     Local: Length of signal l_s, hop-length h, number of frames N_w, filter length l_f
-           N_w → (l_s/ h)
+           N_w ⟵ (l_s/ h)
     \STATE $s \leftarrow \textsc{PadZeros}(s, (w/2, w/2)) $ \\
     \STATE $l_f \leftarrow \textsc{round}(0.03*f_s) $ \\
     \STATE $n_s \leftarrow \textsc{round}(f_s/20) $ \\
