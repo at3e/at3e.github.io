@@ -13,9 +13,9 @@ C_{r's'} = \frac{\phi_{r's'}}{\sqrt{\phi_{r'r'}\phi_{s's'}}}
 \end{equation}
 
 ![Image](/assets/Envelope_comparisions.svg)
-Comparison of the cross-coherence feature against traditional envelope features for a normal PCG recording.
+*Comparison of the cross-coherence feature against traditional envelope features for a normal PCG recording.*
 
 ![Image](/assets/Envelope_comparisions_408.svg)
-Comparison of the cross-coherence feature against traditional envelope features for a PCG with inconsistent sound amplitudes.
+*Comparison of the cross-coherence feature against traditional envelope features for a PCG with inconsistent sound amplitudes.*
 
 where  $ \phi_{r's'} $ is the cross-spectrum of the signals, $ \phi_{r'r'} $ and $ \phi_{s's'} $ are the respective PSDs. The Welch algorithm estimates the cross-spectrum algorithm. 
