@@ -1,5 +1,6 @@
 ---
 layout: post
+use_math: true
 ---
 
 Temporal demodulation is a widely employed technique for signal characterization. Here, I propose an envelope extraction method for periodic signals in presence of ambient noise when the signal and noise characteristics overlap. The design of a filter without prior knowledge of the noise characteristics can prove to be a challenging task. Given a clean template signal, cross coherence can be used to score the signal purity against time.
