@@ -12,7 +12,11 @@ Let $ r(t) $ of $ T $ second duration and a test signal $s(t)$ of any duration. 
 C_{r's'} = \frac{\phi_{r's'}}{\sqrt{\phi_{r'r'}\phi_{s's'}}}
 \end{equation}
 
+<<<<<<< HEAD
 ![Image](/assets/Envelope_comparisions.eps){: style="float: left"}
 ![Image](/assets/Envelope_comparisions_408.eps){: style="float: right"}
+=======
+![Image](/assets/Envelope_comparisions.svg)
+>>>>>>> 43a69488edf31ff5444217cba23cd099bfdcf03f
 
 where  $ \phi_{r's'} $ is the cross-spectrum of the signals, $ \phi_{r'r'} $ and $ \phi_{s's'} $ are the respective PSDs. The Welch algorithm estimates the cross-spectrum algorithm. 
