@@ -19,3 +19,21 @@ C_{r's'} = \frac{\phi_{r's'}}{\sqrt{\phi_{r'r'}\phi_{s's'}}}
 *Comparison of the cross-coherence feature against traditional envelope features for a PCG with inconsistent sound amplitudes.*
 
 where  $ \phi_{r's'} $ is the cross-spectrum of the signals, $ \phi_{r'r'} $ and $ \phi_{s's'} $ are the respective PSDs. The Welch algorithm estimates the cross-spectrum algorithm. 
+{% pseudocode %}
+Function swap(old, new)
+  remaining <- quorumSize
+  success <- False
+  For Each host
+    result[host] <- send(host, propose(old, new))
+    If result[host] = "ok"
+      remaining--
+
+  If remaining > 1+quorumSize/2
+    success <- True
+
+  For Each result
+    If success
+      send(host, confirm(old, new))
+    Else
+      send(host, cancel(old, new))
+{% endpseudocode %}
