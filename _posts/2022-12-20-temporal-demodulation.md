@@ -12,7 +12,7 @@ Let $ r(t) $ of $ T $ second duration and a test signal $s(t)$ of any duration. 
 \begin{equation}
 C_{r's'} = \frac{\phi_{r's'}}{\sqrt{\phi_{r'r'}\phi_{s's'}}}
 \end{equation}
-% endhighlight %}
+{% endhighlight %}
 
 ![Image](/assets/Envelope_comparisions.svg){: style="float: left"}
 Comparison of the cross-coherence feature against traditional envelope features for a normal PCG recording.
