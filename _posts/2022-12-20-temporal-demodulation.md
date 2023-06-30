@@ -25,25 +25,25 @@ where  $ \phi_{r's'} $ is the cross-spectrum of the signals, $ \phi_{r'r'} $ and
     Output: C of dimension.
     Local: Length of signal l_s, hop-length h, number of frames N_w, filter length l_f.
 
-    N_w ⟵(l_s/ h)
+    N_w ⟵Round(l_s/ h)
     s ⟵ PadZeros(s, (w/2, w/2))
     l_f ⟵ Round(0.03*f_s)
     n_s ⟵ Round(f_s/20)
     [t_pn] ⟵ ComputeReferenceFrame(r, w, h, l_f)
     C ⟵ Zeros((Round(N_w+1), n_s/2+1))
-    for t_pn ∈ {t_p2,  ..., t_p(N-1)} 
-        C' ⟵ Zeros((Round(N_w+1), n_s/2+1))
+    for t_pn ∈ {t_p1,  ..., t_pN} 
+        C' ⟵ Zeros((N_w+1), n_s/2+1)
         for t ∈ {t_pn - n, ..., t_pn + n}
-    \STATE \qquad $ C_t \leftarrow \{ \} $ \\
-    \STATE \qquad $ \textbf{for} \hspace{0.5em} N \in [0, \textsc{round}(N_w+1)) $ \\
-    \STATE \quad \qquad $ r' = r[t*h-(w/2): t*h+(w/2)]  $ \\
-    \STATE \quad \qquad $ s' = s[N*h: N*h+w] $ \\
-    \STATE \quad \qquad $ f, C_{rs} = \textsc{Coherence}(r', s', N_{\text{fft}}, n_s) $ \\
-    \STATE \quad \qquad $ C_{xy} = \textsc{GaussianFilter1d}(C_{xy}, \sigma) $ \\
-    \STATE \quad \qquad $ C'_t \leftarrow C_{rs} $ \\
-    \STATE \quad \qquad $ C'_t \leftarrow \textsc{Threshold}(C_t', p) $ \\
-    \STATE \quad \qquad $ C' \leftarrow C' + C'_t $ \\
-    \STATE \qquad $ C \leftarrow C + \textsc{Normalize}(C')$ \\
-    \STATE \textbf{Return} C 
+           C_t ⟵ []
+           for N ∈ {0, (N_w+1))
+           r' ⟵ r[t*h-(w/2): t*h+(w/2)]
+           s' ⟵ s[N*h: N*h+w]
+           f, C_rs ⟵ Coherence(r', s', N_fft, n_s)
+           C_xy ⟵ GaussianFilter1d(C_xy, sigma)
+           C'_t ⟵ C_rs
+           C'_t ⟵ Threshold(C_t', p)
+           C' ⟵ C' + C'_t
+        C \leftarrow C + Normalize(C')
+     Return C 
 ```
   
