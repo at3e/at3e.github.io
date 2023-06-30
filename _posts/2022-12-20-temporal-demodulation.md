@@ -14,6 +14,10 @@ C_{r's'} = \frac{\phi_{r's'}}{\sqrt{\phi_{r'r'}\phi_{s's'}}}
 
 where  $ \phi_{r's'} $ is the cross-spectrum of the signals, $ \phi_{r'r'} $ and $ \phi_{s's'} $ are the respective PSDs. The Welch algorithm estimates the cross-spectrum algorithm. 
 
+![Image](/assets/st.jpg){:style="display:block; margin-left:auto; margin-right:auto"}
+*Comparison of the cross-coherence feature against traditional envelope features for a normal PCG recording.*
+
+
 ![Image](/assets/Envelope_comparisions.svg){:style="display:block; margin-left:auto; margin-right:auto"}
 *Comparison of the cross-coherence feature against traditional envelope features for a normal PCG recording.*
 
