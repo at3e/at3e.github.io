@@ -1,7 +1,7 @@
 ---
 layout: post
 use_math: true
-title: On envelop extraction using cross coherence
+title: On envelope extraction using cross coherence
 ---
 
 Temporal demodulation is a widely employed technique for signal characterisation. Here, I propose an envelope extraction method for periodic signals in the presence of ambient noise and overlapping signal and noise characteristics. The design of a filter without prior knowledge of the noise characteristics can be challenging. Given a clean template signal, cross-coherence can be used to score the signal purity against time.
@@ -15,7 +15,8 @@ C_{r's'} = \frac{\phi_{r's'}}{\sqrt{\phi_{r'r'}\phi_{s's'}}}
 where  $ \phi_{r's'} $ is the cross-spectrum of the signals, $ \phi_{r'r'} $ and $ \phi_{s's'} $ are the respective PSDs. The Welch algorithm estimates the cross-spectrum algorithm. 
 
 ![Image](/assets/st.svg){: style="float: left" width="50%"}
-*It is an approximately periodic signal, with each period consisting of at least two distinct sounds, namely the S1 and S2, consisting of systolic and diastolic movements of the heart.*
+
+* The heart sound signal is an approximately periodic signal, with each period consisting of at least two distinct sounds, namely the S1 and S2, consisting of systolic and diastolic movements of the heart. *
 
 
 ![Image](/assets/Envelope_comparisions.svg){:style="display:block; margin-left:auto; margin-right:auto"}
