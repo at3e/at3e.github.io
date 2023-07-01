@@ -6,11 +6,11 @@ title: On envelope extraction using cross coherence
 
 Temporal demodulation is a widely employed technique for signal characterisation. Here, I propose an envelope extraction method for periodic signals in the presence of ambient noise and overlapping signal and noise characteristics. The design of a filter without prior knowledge of the noise characteristics can be challenging. Given a clean template signal, cross-coherence can be used to score the signal purity against time.
 
-Let $ r(t) $ of $ T $ second duration and a test signal $s(t)$ of any duration. We consider a window length $ w $ and hop-length $ h $. In this example, we will consider the heart sound signal. 
+Let $ r(t) $ be a clean reference signal of time period $ T $. In this example, we will consider the heart sound signal. 
 ![Image](/assets/st.svg){: style="float: left" width="50%"}
-*The heart sound signal is an approximately periodic signal, with each period consisting of at least two distinct sounds, namely the S1 and S2, consisting of systolic and diastolic movements of the heart.*
-
-The window length is approximately one time period of the reference signal. Let $ t_{p_1}, t_{p_2}, t_{p_3}, ...  t_{p_N} $ be the timestamps corresponding to the S1 peaks of the reference signal. We select peaks with co-ordinates $ (t_{p_2}, p_2), ..., (t_{p_{N-1}}, p_{N-1}) $. The reference signal has a uniform period and consistently maintains the S1/S2 amplitudes. A standard peak detection algorithm detects these peaks on the squared-energy envelope. The signals are windowed. The complex-coherency of stationary signals $ r'(t) $ and $ s'(t) $
+The heart sound signal is an approximately periodic signal, with each period consisting of at least two distinct sounds, namely the S1 and S2, consisting of systolic and diastolic movements of the heart.
+The test signal $s(t)$ of any duration has characteristics similar to $ r(t) $ but noisy. We consider a window length $ w $ and hop-length $ h $.
+The window length is approximately one time period of the reference signal. Let $ t_{p_1}, t_{p_2}, t_{p_3}, ...  t_{p_N} $ be the timestamps corresponding to the S1 peaks of the reference signal. We select peaks with co-ordinates $ (t_{p_2}, p_2), ..., (t_{p_{N-1}}, p_{N-1}) $. The reference signal has a uniform period and consistently maintains the S1/S2 amplitudes. When the signals are windowed, the complex-coherency of the windowed signals $ r'(t) $ and $ s'(t) $,
 
 \begin{equation}
 C_{r's'} = \frac{\phi_{r's'}}{\sqrt{\phi_{r'r'}\phi_{s's'}}}
