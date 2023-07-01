@@ -7,6 +7,10 @@
    width="385.24799"
    height="224.832"
    viewBox="0 0 385.24799 224.832"
+   sodipodi:docname="st.jpg.svg"
+   inkscape:version="1.1 (c4e8f9e, 2021-05-24)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg">
@@ -21,7 +25,27 @@
          d="M 0,0 V 224.83203 H 385.24805 V 0 Z m 238.63086,4.8046875 c 0.4567,-0.00473 0.91277,-0.00505 1.36914,0 0.60849,0.00674 1.21659,0.024602 1.82422,0.060547 0.9355,0.055341 2.59217,-0.328379 2.74805,0.5957031 1.37531,8.1535284 0.48952,8.6706234 -3.26172,9.1406244 2.17996,0.9235 3.5895,2.567336 2.95898,6.501954 -0.1037,0.647111 -0.5729,1.167146 -1.22265,1.589843 1.36184,3.522084 -2.26131,6.779313 -7.74024,3.865235 -0.62781,-0.333914 -1.25947,-0.661921 -1.87109,-1.025391 -0.49945,0.02303 -0.98356,0.04115 -1.37891,0.05664 -2.59445,0.579387 -5.19161,1.152254 -7.81055,1.595703 -0.60639,0.102676 -3.79395,0.560071 -4.74218,0.494141 -0.79859,-0.05553 -1.57667,-0.27436 -2.36524,-0.41211 -1.94511,-0.841082 -3.4408,-2.218124 -4.57617,-3.970703 -1.14533,-2.900476 -1.06342,-1.871448 2.31055,-4.873047 -2.06222,-3.791712 -2.61291,-5.477931 -0.35743,-6.707031 -2.55593,-2.5083267 -0.81617,-6.8515625 5.23047,-6.8515625 h 6.64453 8.12891 c 1.36955,0 2.74122,-0.046361 4.11133,-0.060546 z" />
     </clipPath>
   </defs>
+  <sodipodi:namedview
+     id="namedview1193"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     showgrid="false"
+     inkscape:zoom="1.7469267"
+     inkscape:cx="192.62399"
+     inkscape:cy="112.48325"
+     inkscape:window-width="1312"
+     inkscape:window-height="773"
+     inkscape:window-x="0"
+     inkscape:window-y="25"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="g1197" />
   <g
+     inkscape:groupmode="layer"
+     inkscape:label="Image"
      id="g1197">
     <image
        width="385.24799"
@@ -6361,6 +6385,7 @@ RRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQB//Z
        x="119.63867"
        y="44.649841"
        id="text2335"><tspan
+         sodipodi:role="line"
          id="tspan2333"
          x="119.63867"
          y="44.649841"
@@ -6371,6 +6396,7 @@ RRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQB//Z
        x="167.02544"
        y="66.976982"
        id="text2335-3"><tspan
+         sodipodi:role="line"
          id="tspan2333-5"
          x="167.02544"
          y="66.976982"
@@ -6383,5 +6409,12 @@ RRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQB//Z
        style="fill:#ff0000;stroke:#0e8a5e;stroke-width:1.88976;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        d="m 160.56417,28.614656 -1.7173,143.680894"
        id="path8669-5" />
+    <rect
+       style="opacity:1;fill:#ffffff;fill-rule:evenodd;stroke:#ffffff;stroke-width:1.88976;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:8.91213;stroke-opacity:1;fill-opacity:1"
+       id="rect10217"
+       width="176.88206"
+       height="34.918465"
+       x="147.11549"
+       y="-10.876244" />
   </g>
 </svg>
