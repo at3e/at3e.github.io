@@ -5,8 +5,8 @@ author:
 # The `>` after `description:` means to ignore line-breaks until next key.
 # If you want to omit the line-break after the end of text, use `>-` instead.
 description: >
-  I am an engineer who started off with a broad interest in solving inverse
-  problems in signal processing. I worked on applied ML in 
+  I am an engineer who started off with an interest in solving inverse
+  problems in signal processing. Lately I work with graphs a lot. 
 
 # Build settings
 
