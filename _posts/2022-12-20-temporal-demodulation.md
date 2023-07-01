@@ -14,7 +14,7 @@ C_{r's'} = \frac{\phi_{r's'}}{\sqrt{\phi_{r'r'}\phi_{s's'}}}
 
 where  $ \phi_{r's'} $ is the cross-spectrum of the signals, $ \phi_{r'r'} $ and $ \phi_{s's'} $ are the respective PSDs. The Welch algorithm estimates the cross-spectrum algorithm. 
 
-![Image](/assets/st.svg){:float left width="50%"}
+![Image](/assets/st.svg){: style="float: left" width="50%"}
 *It is an approximately periodic signal, with each period consisting of at least two distinct sounds, namely the S1 and S2, consisting of systolic and diastolic movements of the heart.*
 
 
