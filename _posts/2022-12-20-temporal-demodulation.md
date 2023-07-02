@@ -16,19 +16,15 @@ The window length is approximately one time period of the reference signal. Let 
 C_{r's'} = \frac{\phi_{r's'}}{\sqrt{\phi_{r'r'}\phi_{s's'}}}
 \end{equation}
 
-where  $ \phi_{r's'} $ is the cross-spectrum of the signals, $ \phi_{r'r'} $ and $ \phi_{s's'} $ are the respective PSDs. 
-
-The Welch algorithm estimates the cross-spectrum. 
+where  $ \phi_{r's'} $ is the cross-spectrum of the signals, $ \phi_{r'r'} $ and $ \phi_{s's'} $ are the respective power spectral densities (PSDs). The Welch algorithm estimates the PSD. 
 
 ```
     Input: Window length w, sampling frequency f_s.
     Output: C of dimension.
-    Local: Length of signal l_s, hop-length h, number of frames N_w, filter length l_f.
+    Local: Length of signal l_s, hop-length h, number of frames N_w, filter length l_f, n_s is the length per segment.
 
     N_w ⟵Round(l_s/ h)
     s ⟵ PadZeros(s, (w/2, w/2))
-    l_f ⟵ Round(0.03*f_s)
-    n_s ⟵ Round(f_s/20)
     [t_pn] ⟵ ComputeReferenceFrame(r, w, h, l_f)
     C ⟵ Zeros((Round(N_w+1), n_s/2+1))
     for t_pn ∈ {t_p1,  ..., t_pN} 
@@ -46,7 +42,11 @@ The Welch algorithm estimates the cross-spectrum.
         C \leftarrow C + Normalize(C')
      Return C 
 ```
-  
+*Algorithm for signal scoring*
+
+![Image](/assets/coherence-plot.svg){:style="display:block; margin-left:auto; margin-right:auto"}
+*Comparison of the cross-coherence feature against traditional envelope features for a normal PCG recording.*
+
 ![Image](/assets/Envelope_comparisions.svg){:style="display:block; margin-left:auto; margin-right:auto"}
 *Comparison of the cross-coherence feature against traditional envelope features for a normal PCG recording.*
 
