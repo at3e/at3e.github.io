@@ -45,7 +45,7 @@ where  $ \phi_{r's'} $ is the cross-spectrum of the signals, $ \phi_{r'r'} $ and
 *Algorithm for signal scoring*
 
 ![Image](/assets/coherence-plot.svg){:style="display:block; margin-left:auto; margin-right:auto"}
-*Comparison of the cross-coherence feature against traditional envelope features for a normal PCG recording.*
+*Top: Test signal `s` and score `C`; Bottom: Cross coherence plot `C_rs`.*
 
 ![Image](/assets/Envelope_comparisions.svg){:style="display:block; margin-left:auto; margin-right:auto"}
 *Comparison of the cross-coherence feature against traditional envelope features for a normal PCG recording.*
