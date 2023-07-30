@@ -1,0 +1,9 @@
+---
+layout: single
+title: "My MS Thesis"
+author_profile: TRUE
+header:
+  image: assets/images/banner.jpg
+---
+
+<embed src="https://at3e.github.io/assets/Thesis_draft_ee19s006_Jun27.pdf" type="application/pdf" />
