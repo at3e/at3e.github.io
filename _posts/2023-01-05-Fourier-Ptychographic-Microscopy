@@ -6,4 +6,4 @@ header:
   image: assets/images/banner.jpg
 ---
 
-<embed src="https://at3e.github.io/assets/Thesis_draft_ee19s006_Jun27.pdf" type="application/pdf" />
+<a href="assets/Thesis_draft_ee19s006_Jun27.pdf" class="image fit"></a>
