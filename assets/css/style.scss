@@ -3,5 +3,5 @@
 ---
 
 @import
-  "minima/skins/{{ site.minima.skin | default: 'solarized-light' }}",
+  "minima/skins/{{ site.minima.skin | default: 'normal' }}",
   "minima/initialize";
