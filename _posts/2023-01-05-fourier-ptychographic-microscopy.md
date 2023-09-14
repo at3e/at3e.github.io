@@ -1,9 +1,7 @@
 ---
 layout: post
 use_math: true
-title: On me
+title: My Thesis
 ---
 
-Hi
-[Intro.pdf](https://github.com/at3e/at3e.github.io/tree/main/assets/Thesis_draft_ee19s006_Jun27.pdf)
-
+My MS Thesis is my most original creation. Please find it here. <a href="https://drive.google.com/file/d/1Tw95obu_oJoG6ifgBMoLjCZYElQvLa_b/view?usp=sharing" rel="noreferrer">here</a>
