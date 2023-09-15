@@ -1,4 +1,9 @@
-
+---
+layout: post
+use_math: true
+title: On a graph problem
+---
+```
 import random
 import networkx as nx
 import numpy as np
@@ -9,7 +14,7 @@ import matplotlib.pyplot as plt
 import matplotlib.colors as mcolors
 import numpy as np
 random.seed(7)
-
+```
 with open('sample_graph.dat', 'rb') as fp:
     g = pickle.load(fp)
 
