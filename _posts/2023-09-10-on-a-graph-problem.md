@@ -8,7 +8,9 @@ Lately, I came across this problem for one of my projects. I will explain in her
 Start with a directed graph with nodes shown in blue.
 ![Image](/assets/Graph/BGraph.001.jpeg){: style="float: center" width="50%"}
 Each Blue box is connected to a certain number of elements shown in Red boxes.
-![Image](/assets/Graph/BGraph.002.jpeg){width="10%" align="center"}
+![Image](/assets/Graph/BGraph.002.jpeg){: width="10%" align="center"}
+
+
 ```
 import random
 import networkx as nx
