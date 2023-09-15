@@ -3,6 +3,10 @@ layout: post
 use_math: true
 title: On a graph problem
 ---
+
+Lately, I came across this problem for one of my projects. I will explain in here and present an approach to solve it.
+Start with a directed graph with nodes shown in blue.
+![Image](/assets/BGraph.svg){: style="float: left" width="50%"}
 ```
 import random
 import networkx as nx
