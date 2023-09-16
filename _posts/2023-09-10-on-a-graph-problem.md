@@ -13,6 +13,8 @@ Each Blue box is connected to a certain number of elements shown in Red boxes.
 
 ![Image](/assets/Graph/BGraph.003.jpeg){: width="50%" align="center"}
 
+![Image](/assets/Graph/BGraph.004.jpeg){: width="50%" align="center"}
+
 ```
 import random
 import networkx as nx
