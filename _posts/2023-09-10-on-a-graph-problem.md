@@ -13,6 +13,8 @@ Each Blue box is connected to a certain number of elements shown in Red boxes.
 
 ![Image](/assets/Graph/BGraph.003.jpeg){: width="50%" align="center"}
 
+Each Red box can have a maximum of I_R incoming edges. There can be zero or many outgoing edges. But at least one input or output edge must be used. But while constructing the graph, no set of Red boxes can form a chain of more than N stages. For example, if N=3, the set of Red boxes connected using Red dotted lines is invalid, but the set of Red boxes connected using Green dotted lines works.
+
 ![Image](/assets/Graph/BGraph.004.jpeg){: width="50%" align="center"}
 
 ```
@@ -26,6 +28,7 @@ import matplotlib.pyplot as plt
 import matplotlib.colors as mcolors
 import numpy as np
 random.seed(7)
+```
 ```
 with open('sample_graph.dat', 'rb') as fp:
     g = pickle.load(fp)
@@ -58,7 +61,7 @@ logicG = nx.DiGraph()
 logicG_list = []
 for sg in S:
     sg_logic = nx.DiGraph()
-
+```
     # Initiate LUT names
     for node in sg:
         inLUTs = g.nodes[node]['IN']
