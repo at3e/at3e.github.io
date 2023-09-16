@@ -6,12 +6,24 @@ title: On a graph problem
 
 Lately, I came across this problem for one of my projects. I will explain in here and present an approach to solve it.
 Start with a directed graph with nodes shown in blue.
-![Image](/assets/Graph/BGraph.001.jpeg){: style="float: center" width="50%"}
+
+![Image](/assets/Graph/BGraph.001.jpeg){: width="50%"}
+*Figure 1: A directed graph G*
+
 Each Blue box is connected to a certain number of elements shown in Red boxes.
 
 ![Image](/assets/Graph/BGraph.002.jpeg){: width="50%" align="center"}
 
+Here’s the problem:  Derive a graph of the Red boxes, given the underlying of the Blue box graph. A sample set of edges is shown in Black dotted lines. Specifically, a Red or Green box can talk to another Red or Green box if there exists an edge between their corresponding Blue boxes. But subject to certain constraints.
+
 ![Image](/assets/Graph/BGraph.003.jpeg){: width="50%" align="center"}
+
+Each Red box can have a maximum of I_R incoming edges. There can be zero or many outgoing edges. But at least one input or output edge must be used. But while constructing the graph, no set of Red boxes can form a chain of more than N stages. For example, if N=3, the set of Red boxes connected using Red dotted lines is invalid, but the set of Red boxes connected using Green dotted lines works.
+
+![Image](/assets/Graph/BGraph.004.jpeg){: width="50%" align="center"}
+
+
+First, import the necessary python libraries.
 
 ```
 import random
@@ -25,9 +37,18 @@ import matplotlib.colors as mcolors
 import numpy as np
 random.seed(7)
 ```
+
+I have sample graph of 100 nodes, similar to the one shown earlier. Red boxes are randomly assigned to each node and are divided into two groups 'IN' and 'OUT'. These nodes of the graph that we want to derive.
+```
 with open('sample_graph.dat', 'rb') as fp:
     g = pickle.load(fp)
+for node in g.nodes():
+    # g.nodes[node].update({'IN': g.in_degree(node), 'OUT': g.out_degree(node)+1})
+    g.nodes[node].update({'IN': random.randint(1, 4), 'OUT': random.randint(1, 6)})
+```
 
+S of one-hop disjoints subgraphs sg  
+```
 # Partition graph
 Node_list = list(g.nodes())
 k = 3
@@ -46,17 +67,15 @@ while len(list(set(Nodes_visited))) < len(g.nodes()):
         # Nodes_visited = list(set(Nodes_visited))
         S.append(sg)
     Node_list = list(n for n in g.nodes() if n not in Nodes_visited)
+```
 
-for node in g.nodes():
-    # g.nodes[node].update({'IN': g.in_degree(node), 'OUT': g.out_degree(node)+1})
-    g.nodes[node].update({'IN': random.randint(1, 4), 'OUT': random.randint(1, 6)})
-
+```
 # Form subgraphs
 logicG = nx.DiGraph()
 logicG_list = []
 for sg in S:
     sg_logic = nx.DiGraph()
-
+```
     # Initiate LUT names
     for node in sg:
         inLUTs = g.nodes[node]['IN']
