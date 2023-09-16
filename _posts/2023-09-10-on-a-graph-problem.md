@@ -25,10 +25,7 @@ Each Red box can have a maximum of I_R incoming edges. There can be multiple out
 ![Image](/assets/Graph/BGraph.004.jpeg){: width="50%" align="center"}
 *Figure 4: Set of valid and invalid edges of graph `G'`*
 
-I worked out an approach to this problem. The graph `G` is split into one-hop subgraphs as shown below.
-
-![Image](/assets/Graph/BGraph.005.jpeg){: width="50%" align="center"}
-
+I worked out an approach to this problem. Let's walk through with a code. 
 First, import the necessary python libraries.
 
 ```
@@ -53,7 +50,12 @@ for node in g.nodes():
     g.nodes[node].update({'IN': random.randint(1, 4), 'OUT': random.randint(1, 6)})
 ```
 
-S of one-hop disjoints subgraphs sg  
+Next, the graph `G` is partitioned into one-hop subgraphs as shown below.
+
+![Image](/assets/Graph/BGraph.005.jpeg){: width="50%" align="center"}
+
+S is a list of one-hop disjoints subgraphs sg.  
+
 ```
 # Partition graph
 Node_list = list(g.nodes())
@@ -81,21 +83,20 @@ logicG = nx.DiGraph()
 logicG_list = []
 for sg in S:
     sg_logic = nx.DiGraph()
-    # Initiate LUT names
+    # Initiate node names
     for node in sg:
-        inLUTs = g.nodes[node]['IN']
-        pin = 6; random.randint(1, 4)
-        outLUTs = g.nodes[node]['OUT'] // pin
-        outFLOPs = g.nodes[node]['OUT'] % pin
-        g.nodes[node].update({'pins': pin, 'inLUTs_out': list(node+'_inLUT'+str(i+1)+'_out' for i in range(inLUTs)),
-                              'outLUTs_in': list(node+'_outLUT'+str(i+1)+'_in'+ '['+str(j)+']' for i in range(outLUTs) for j in range(4)),
-                              'inLUTs_in': list(node+'_inLUT'+str(i+1)+'_in'+ '['+str(j)+']' for i in range(inLUTs) for j in range(4)),
-                              'outLUTs_out': list(node+'_outLUT'+str(i+1)+'_out' for i in range(inLUTs))})
-        # Add nodes to logic graph
-        for lgnode in g.nodes[node]['LUTs_out']+g.nodes[node]['LUTs_in']+g.nodes[node]['FFs_in']:
+        inRnodes = g.nodes[node]['IN']
+        I_R = 6; random.randint(1, 4)
+        outRnodes = g.nodes[node]['OUT'] // I_R
+        g.nodes[node].update({'I_R': I_R, 'inR_out': list(node+'_inR'+str(i+1)+'_out' for i in range(inR)),
+                              'outR_in': list(node+'_outR'+str(i+1)+'_in'+ '['+str(j)+']' for i in range(outRnodes) for j in range(4)),
+                              'inR_in': list(node+'_inR'+str(i+1)+'_in'+ '['+str(j)+']' for i in range(inRnodes) for j in range(4)),
+                              'outLUTs_out': list(node+'_outLUT'+str(i+1)+'_out' for i in range(inRnodes))})
+        # Add nodes to G'
+        for lgnode in g.nodes[node]['inR_out']+g.nodes[node]['outR_in']+g.nodes[node]['inR_in']+g.nodes[node]['outR_out']:
             sg_logic.add_node(lgnode)
 
-        # Assign logic graph edges
+        # Assign graph edges
         inPins_assigned = []
         outPins_assigned = []
         for node in sg:
@@ -126,7 +127,8 @@ for sg in S:
                 sg_logic.add_edge(inPin, outPin)
         logicG_list.append(sg_logic)
         logicG = nx.compose(logicG, sg_logic)
-
+```
+```
 subG = S
 # Now connect pairs of subgraphs
 k = 0
