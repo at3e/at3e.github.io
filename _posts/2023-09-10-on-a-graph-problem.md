@@ -7,7 +7,7 @@ title: On a graph problem
 Lately, I came across this problem for one of my projects. I will explain in here and present an approach to solve it.
 Start with a directed graph with nodes shown in blue.
 
-![Image](/assets/Graph/BGraph.001.jpeg){: style="float: center" width="50%"}
+![Image](/assets/Graph/BGraph.001.jpeg){: width="50%"}
 *Figure 1: A directed graph G*
 
 Each Blue box is connected to a certain number of elements shown in Red boxes.
