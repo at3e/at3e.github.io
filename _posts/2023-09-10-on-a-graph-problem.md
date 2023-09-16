@@ -9,6 +9,7 @@ Start with a directed graph with nodes shown in blue.
 
 ![Image](/assets/Graph/BGraph.001.jpeg){: style="float: center" width="50%"}
 *Figure 1: A directed graph G*
+
 Each Blue box is connected to a certain number of elements shown in Red boxes.
 
 ![Image](/assets/Graph/BGraph.002.jpeg){: width="50%" align="center"}
@@ -39,6 +40,8 @@ random.seed(7)
 
 I have sample graph of 100 nodes, similar to the one shown earlier. Red boxes are randomly assigned to each node and are divided into two groups 'IN' and 'OUT'. These nodes of the graph that we want to derive.
 ```
+with open('sample_graph.dat', 'rb') as fp:
+    g = pickle.load(fp)
 for node in g.nodes():
     # g.nodes[node].update({'IN': g.in_degree(node), 'OUT': g.out_degree(node)+1})
     g.nodes[node].update({'IN': random.randint(1, 4), 'OUT': random.randint(1, 6)})
@@ -46,9 +49,6 @@ for node in g.nodes():
 
 S of one-hop disjoints subgraphs sg  
 ```
-with open('sample_graph.dat', 'rb') as fp:
-    g = pickle.load(fp)
-
 # Partition graph
 Node_list = list(g.nodes())
 k = 3
