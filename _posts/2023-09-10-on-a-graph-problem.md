@@ -8,11 +8,12 @@ Lately, I came across this problem for one of my projects. I will explain in her
 Start with a directed graph with nodes shown in blue.
 
 ![Image](/assets/Graph/BGraph.001.jpeg){: width="50%"}
-*Figure 1: A directed graph G*
+*Figure 1: A directed graph `G`*
 
 Each Blue box is connected to a certain number of elements shown in Red boxes.
 
 ![Image](/assets/Graph/BGraph.002.jpeg){: width="50%" align="center"}
+*Figure 2: Graph `G` and `G'`*
 
 Here’s the problem:  Derive a graph of the Red boxes, given the underlying of the Blue box graph. A sample set of edges is shown in Black dotted lines. Specifically, a Red or Green box can talk to another Red or Green box if there exists an edge between their corresponding Blue boxes. But subject to certain constraints.
 
@@ -22,6 +23,9 @@ Each Red box can have a maximum of I_R incoming edges. There can be zero or many
 
 ![Image](/assets/Graph/BGraph.004.jpeg){: width="50%" align="center"}
 
+I worked out an approach to this problem. The graph `G` is split into one-hop subgraphs as shown below.
+
+![Image](/assets/Graph/BGraph.004.jpeg){: width="50%" align="center"}
 
 First, import the necessary python libraries.
 
@@ -75,7 +79,6 @@ logicG = nx.DiGraph()
 logicG_list = []
 for sg in S:
     sg_logic = nx.DiGraph()
-```
     # Initiate LUT names
     for node in sg:
         inLUTs = g.nodes[node]['IN']
@@ -160,3 +163,4 @@ for k in range(3):
                     visited.append(s1); visited.append(s2)
                     dS_.append(set(list(s1)+list(s2)))
     dS = dS_
+```
