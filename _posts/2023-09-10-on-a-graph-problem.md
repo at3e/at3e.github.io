@@ -11,6 +11,8 @@ Each Blue box is connected to a certain number of elements shown in Red boxes.
 
 ![Image](/assets/Graph/BGraph.002.jpeg){: width="50%" align="center"}
 
+Here’s the problem:  Derive a graph of the Red boxes, given the underlying of the Blue box graph. A sample set of edges is shown in Black dotted lines. Specifically, a Red or Green box can talk to another Red or Green box if there exists an edge between their corresponding Blue boxes. But subject to certain constraints.
+
 ![Image](/assets/Graph/BGraph.003.jpeg){: width="50%" align="center"}
 
 Each Red box can have a maximum of I_R incoming edges. There can be zero or many outgoing edges. But at least one input or output edge must be used. But while constructing the graph, no set of Red boxes can form a chain of more than N stages. For example, if N=3, the set of Red boxes connected using Red dotted lines is invalid, but the set of Red boxes connected using Green dotted lines works.
