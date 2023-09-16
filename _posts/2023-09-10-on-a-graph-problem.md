@@ -15,17 +15,19 @@ Each Blue box is connected to a certain number of elements shown in Red boxes.
 ![Image](/assets/Graph/BGraph.002.jpeg){: width="50%" align="center"}
 *Figure 2: Graph `G` and `G'`*
 
-Here’s the problem:  Derive a graph of the Red boxes, given the underlying of the Blue box graph. A sample set of edges is shown in Black dotted lines. Specifically, a Red or Green box can talk to another Red or Green box if there exists an edge between their corresponding Blue boxes. But subject to certain constraints.
+Here’s the problem:  Derive a graph `G'` of the Red boxes, given the underlying of the Blue box graph. A sample set of edges is shown in Black dotted lines. Specifically, a Red box can talk to another Red box if there exists an edge between their corresponding Blue boxes. But subject to certain constraints.
 
 ![Image](/assets/Graph/BGraph.003.jpeg){: width="50%" align="center"}
+*Figure 3: Graph `G` and nodes of graph `G'`*
 
-Each Red box can have a maximum of I_R incoming edges. There can be zero or many outgoing edges. But at least one input or output edge must be used. But while constructing the graph, no set of Red boxes can form a chain of more than N stages. For example, if N=3, the set of Red boxes connected using Red dotted lines is invalid, but the set of Red boxes connected using Green dotted lines works.
+Each Red box can have a maximum of I_R incoming edges. There can be multiple outgoing edges. But at least one input or output edge must be used. But while constructing the graph `G'`, no set of Red boxes can form a chain of more than N stages. For example, if N=3, the set of Red boxes connected using Red dotted lines is invalid, but the set of Red boxes connected using Green dotted lines works.
 
 ![Image](/assets/Graph/BGraph.004.jpeg){: width="50%" align="center"}
+*Figure 4: Set of valid and invalid edges of graph `G'`*
 
 I worked out an approach to this problem. The graph `G` is split into one-hop subgraphs as shown below.
 
-![Image](/assets/Graph/BGraph.004.jpeg){: width="50%" align="center"}
+![Image](/assets/Graph/BGraph.005.jpeg){: width="50%" align="center"}
 
 First, import the necessary python libraries.
 
