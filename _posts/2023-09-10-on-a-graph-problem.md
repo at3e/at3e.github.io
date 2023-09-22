@@ -23,7 +23,7 @@ Here’s the problem:  Derive a graph G' of the Red boxes, given the underlyin
 
 *Figure 3: Graph G and nodes of graph G'*
 
-Each Red box can have a maximum of `Ir` incoming edges. There can be multiple outgoing edges. But at least one input or output edge must be used. But while constructing the graph `G'`, no set of Red boxes can form a chain of more than N stages. For example, if N=3, the set of Red boxes connected using Red dotted lines is invalid, but the set of Red boxes connected using Green dotted lines works.
+Each Red box can have a maximum of `Ir` incoming edges. There can be multiple outgoing edges. But at least one input or output edge must be used. But while constructing the graph `G'`, no set of Red boxes can form a chain of more than N stages. For example, if N=3, an invalid set of edges the set of edges is marked using Red solid lines. Similarly the set of edges marked using Green solid lines connecting a chain of three nodes is valid.
 
 ![Image](/assets/Graph/BGraph.004.jpeg){: width="65%" align="center"}
 
