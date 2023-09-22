@@ -76,7 +76,6 @@ while len(list(set(Nodes_visited))) < len(G.nodes()):
     Nodes_visited += loads
     if len(loads)>0:
         sg = set(loads)
-        # Nodes_visited = list(set(Nodes_visited))
         S.append(sg)
     Node_list = list(n for n in G.nodes() if n not in Nodes_visited)
 ```
