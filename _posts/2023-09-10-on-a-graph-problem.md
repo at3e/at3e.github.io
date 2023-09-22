@@ -20,7 +20,7 @@ Here’s the problem:  Derive a graph G' of the Red boxes, given the underlyin
 ![Image](/assets/Graph/BGraph.003.jpeg){: width="65%" align="center"}
 *Figure 3: Graph G and nodes of graph G'*
 
-Each Red box can have a maximum of I_R incoming edges. There can be multiple outgoing edges. But at least one input or output edge must be used. But while constructing the graph `G'`, no set of Red boxes can form a chain of more than N stages. For example, if N=3, the set of Red boxes connected using Red dotted lines is invalid, but the set of Red boxes connected using Green dotted lines works.
+Each Red box can have a maximum of `Ir` incoming edges. There can be multiple outgoing edges. But at least one input or output edge must be used. But while constructing the graph `G'`, no set of Red boxes can form a chain of more than N stages. For example, if N=3, the set of Red boxes connected using Red dotted lines is invalid, but the set of Red boxes connected using Green dotted lines works.
 
 ![Image](/assets/Graph/BGraph.004.jpeg){: width="65%" align="center"}
 *Figure 4: Set of valid and invalid edges of graph G'*
@@ -85,7 +85,7 @@ for sg in S:
     # Initiate node names
     for node in sg:
         inRnodes = G.nodes[node]['IN']
-        I_R = 6; random.randint(1, 4)
+        Ir = 6 # Set the maximum number of inputs 
         outRnodes = G.nodes[node]['OUT'] // I_R
         G.nodes[node].update({'I_R': I_R, 'inR_out': list(node+'_inR'+str(i+1)+'_out' for i in range(I_R)),
                               'outR_in': list(node+'_outR'+str(i+1)+'_in'+ '['+str(j)+']' for i in range(outRnodes) for j in range(4)),
