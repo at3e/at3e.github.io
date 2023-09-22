@@ -6,24 +6,27 @@ title: On a graph problem
 
 Lately, I came across this problem for one of my projects. I will explain in here and present an approach to solve it.
 Start with a directed graph with nodes shown in blue. A directed graph or a "digraph," is a data structure representation that consists of a set of nodes (or vertices) and a set of directed edges (or arcs) that connect pairs of nodes. Each edge is directed from one node to another that indicates, for example, the direction of propagation of information from a node to the next.
-{:.text-align-center}
-![Image](/assets/Graph/BGraph.001.jpeg){:.centered; width="65%"}
+
+![Image](/assets/Graph/BGraph.001.jpeg){: width="65%" align="center"}
 
 *Figure 1: A digraph G*
 
 Each Blue box is connected to a certain number of elements shown in Red boxes.
 
 ![Image](/assets/Graph/BGraph.002.jpeg){: width="65%" align="center"}
+
 *Figure 2: Graph G and G'*
 
 Here’s the problem:  Derive a graph G' of the Red boxes, given the underlying of the Blue box graph. A sample set of edges is shown in Black dotted lines. Specifically, a Red box can talk to another Red box if there exists an edge between their corresponding Blue boxes. But subject to certain constraints.
 
 ![Image](/assets/Graph/BGraph.003.jpeg){: width="65%" align="center"}
+
 *Figure 3: Graph G and nodes of graph G'*
 
 Each Red box can have a maximum of `Ir` incoming edges. There can be multiple outgoing edges. But at least one input or output edge must be used. But while constructing the graph `G'`, no set of Red boxes can form a chain of more than N stages. For example, if N=3, the set of Red boxes connected using Red dotted lines is invalid, but the set of Red boxes connected using Green dotted lines works.
 
 ![Image](/assets/Graph/BGraph.004.jpeg){: width="65%" align="center"}
+
 *Figure 4: Set of valid and invalid edges of graph G'*
 
 I worked out an approach to this problem. Let's walk through with a code. 
