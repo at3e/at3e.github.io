@@ -5,11 +5,11 @@ title: On a graph problem
 ---
 
 Lately, I came across this problem for one of my projects. I will explain in here and present an approach to solve it.
-Start with a directed graph with nodes shown in blue. A directed graph or a "digraph," is a data structure representation that consists of a set of nodes (or vertices) and a set of directed edges (or arcs) that connect pairs of nodes. Each edge is directed from one node to another that indicates, for example, the direction of propagation of information from a node to the next.
+Start with a directed graph with nodes shown in blue. A directed graph or a "digraph," is a data structure representation that consists of a set of nodes (or vertices) and a set of directed edges (or arcs) that connect pairs of nodes. Each edge is directed from one node to another that indicates, for example, the direction of propagation of information from a node to the next. A directed acyclic graph(DAG) is a digraph with no directed cycles.
 
 ![Image](/assets/Graph/BGraph.001.jpeg){: width="65%" align="center"}
 
-*Figure 1: A digraph G*
+*Figure 1: A DAG G*
 
 Each Blue box is connected to a certain number of elements shown in Red boxes.
 
