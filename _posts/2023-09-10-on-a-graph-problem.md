@@ -128,7 +128,7 @@ for sg in S:
         Gp = nx.compose(Gp, sg_p)
 ```
 Now comes the interesting part. The subgraphs are now merged in pairs, making sure the same node is not used in any iterations.
-
+<!---
 ```
 subG = S
 # Now connect pairs of subgraphs
@@ -173,7 +173,7 @@ for k in range(3):
 The second method although computationally expensive, can provide us a more desireable solution
 ```
 for node in G.nodes():
-    G.nodes[node].update({'LUTs': 16, 'FFs': 32})
+    G.nodes[node].update({'Rnodes': 8})
 
 logicG = nx.DiGraph()
 for node in G:
@@ -226,4 +226,5 @@ for net in Nets:
                 missed+=1
                 continue
 
-``` 
+```
+--> 
