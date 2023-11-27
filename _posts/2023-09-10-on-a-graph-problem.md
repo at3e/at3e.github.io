@@ -169,3 +169,61 @@ for k in range(3):
                     dS_.append(set(list(s1)+list(s2)))
     dS = dS_
 ```
+
+The second method although computationally expensive, can provide us a more desireable solution
+```
+for node in G.nodes():
+    G.nodes[node].update({'LUTs': 16, 'FFs': 32})
+
+logicG = nx.DiGraph()
+for node in G:
+    pin = 6#; random.randint(1, 4)
+    LUTs = G.nodes[node]['LUTs']
+    FLOPs = G.nodes[node]['FFs']
+
+    G.nodes[node].update({'pins': pin, 
+                          'LUTs_out': list(node+'_LUT'+str(i+1)+'_out' for i in range(LUTs)), 
+                          'LUTs_in': list(node+'_LUT'+str(i+1)+'_in'+ '['+str(j)+']' for i in range(LUTs) for j in range(pin)),
+                          'FFs_in': list(node+'_FF'+str(i+1)+'_in' for i in range(FLOPs)),
+                          'FFs_out': list(node+'_FF'+str(i+1)+'_out' for i in range(FLOPs)),
+                         })
+    # Add nodes to logic graph
+    for lgnode in G.nodes[node]['LUTs_out'] + G.nodes[node]['LUTs_in'] + \
+                  G.nodes[node]['LUTs_in'] + G.nodes[node]['LUTs_out'] + \
+                  G.nodes[node]['FFs_in'] + G.nodes[node]['FFs_out'] + \
+                  G.nodes[node]['FFs_in'] + G.nodes[node]['FFs_out'] :
+        logicG.add_node(lgnode)
+        logicG.nodes[lgnode]['s'] = 0
+count = 0
+missed = 0
+max_length = 5
+scores = []
+for net in Nets:
+    if net.src is not None:
+        src_node = "INT_X"+str(net.src_x)+"Y"+str(net.src_y)
+        outPin = random.choice(list(n for n in G.nodes[src_node]['LUTs_out'] if logicG.nodes[n]['s']<max_length)+
+                                list(n for n in G.nodes[src_node]['FFs_out'] if logicG.nodes[n]['s']<max_length))
+
+        for i in range(net.fanout):
+            count +=1
+            dst_node = "INT_X"+str(net.dst_x[i])+"Y"+str(net.dst_y[i])
+            # if src_node != dst_node:
+            try:
+                inPin = random.choice(list(n for n in G.nodes[dst_node]['LUTs_in'] if logicG.nodes[n]['s']==0)+
+                                      list(n for n in G.nodes[dst_node]['FFs_in'] if logicG.nodes[n]['s']==0))
+
+                inPin_node_name = inPin.split('_')
+                inPin_out = '_'.join(inPin_node_name[:-1]) + '_out'
+                logicG.add_edge(outPin, inPin)
+                
+                # Update graph
+                if 'LUT' in outPin and 'LUT' in inPin:
+                    logicG.nodes[inPin_out]['s'] = max(logicG.nodes[inPin_out]['s'], logicG.nodes[outPin]['s'] + 1)
+                    scores.append(logicG.nodes[inPin_out]['s'])
+                    updateNodescores(logicG, inPin_out)
+                logicG.nodes[inPin]['s'] = logicG.nodes[inPin]['s'] + 1
+            except:
+                missed+=1
+                continue
+
+``` 
