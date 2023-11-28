@@ -45,17 +45,20 @@ import numpy as np
 random.seed(7)
 ```
 
-Given a random Directed acyclic graph `G_B`, similar to the DAG G with Blue nodes shown in Figure 1. There are several ways to create a DAG, a simple one can be found <a href="https://gist.github.com/flekschas/0ea70dec4d92bc706e61" rel="noreferrer">here</a> . Red boxes are randomly assigned to each node and are divided into two groups 'IN' and 'OUT'. These nodes of the graph `G_R` that we want to derive. Let the number of Red nodes assigned to each node of `G_B` be `Rnodes`. In this case I will limit it till 4. 
+Given a random Directed acyclic graph `G_B` created using the `networkx` package, similar to the DAG G with Blue nodes shown in Figure 1. There are several ways to create a DAG, a simple one can be found <a href="https://gist.github.com/flekschas/0ea70dec4d92bc706e61" rel="noreferrer">here</a> . Red boxes are randomly assigned to each node. These nodes of the graph `G_R` that we want to derive. Let the number of Red nodes assigned to each node of `G_B` be `numR`. In this case I will limit it till 4. These nodes are added to the empty graph `G_R` (initialized in line no 2.
+
 ```
+# Initialize G_R
+G_R = nx.DiGraph()
+
 for node in G_B.nodes():
-    Rnodes = random.randint(1, 4)
-    G_B.nodes[node].update({'Rnodes': Rnodes})
-     G.nodes[node]['IN']
-    G.nodes[node].update({'inR_out': list(node+'_inR'+str(i+1)+'_out' for i in range(I_R)),
-                              'outR_in': list(node+'_outR'+str(i+1)+'_in'+ '['+str(j)+']' for i in range(outRnodes) for j in range(4)),
-                              'inR_in': list(node+'_inR'+str(i+1)+'_in'+ '['+str(j)+']' for i in range(inRnodes) for j in range(4)),
-                              'outR_out': list(node+'_outR'+str(i+1)+'_out' for i in range(inRnodes))})
-        # Add nodes to G'
+    numR = random.randint(1, 4)
+    G_B.nodes[node].update({'numR': numR})
+    G_B.nodes[node].update({'Rnodes': list(node+'_R'+str(i+1) for i in range(numR))})
+
+    # Add nodes to G_R
+    for nodeR in G_B.nodes[node]['Rnodes']:
+            G_R.add_node(nodeR)
 ```
 
 
