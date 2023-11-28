@@ -39,7 +39,7 @@ import numpy as np
 random.seed(7)
 ```
 
-Given a random Directed acyclic graph `G_B` created using the `networkx` package, similar to the DAG G with Blue nodes shown in Figure 1. There are several ways to create a DAG, a simple one can be found <a href="https://gist.github.com/flekschas/0ea70dec4d92bc706e61" rel="noreferrer">here</a> . Red boxes are randomly assigned to each node. These nodes of the graph `G_R` that we want to derive. Let the number of Red nodes assigned to each node of `G_B` be `numR`. In this case I will limit it till 4. These nodes are added to the empty graph `G_R` (initialized in line no 2.
+Given a random Directed acyclic graph `G_B` created using the `networkx` package, similar to the DAG G with Blue nodes shown in Figure 1. There are several ways to create a DAG, a simple one can be found <a href="https://gist.github.com/flekschas/0ea70dec4d92bc706e61" rel="noreferrer">here</a> . Red boxes are randomly assigned to each node. These nodes of the graph `G_R` that we want to derive. Let the number of Red nodes assigned to each node of `G_B` be `numR`. In this case I will limit it till 4. These nodes are added to the empty graph `G_R`. Each node of `G_R` has a `score`, initialized to 0. The `score` keeps track of the levels of Red nodes preceeding it.
 
 ```
 # Initialize G_R
@@ -53,22 +53,21 @@ for node in G_B.nodes():
     # Add nodes to G_R
     for nodeR in G_B.nodes[node]['Rnodes']:
             G_R.add_node(nodeR)
+            G_R.nodes[nodeR].update({'score': 0})
 ```
 
-
-We traverse the graph `G_B`, adding edges to `G_R` along the way while also keeping track of the chain length for every node of `G_R`. Every 
+We traverse the graph `G_B`, adding edges to `G_R` along the way while also keeping track of the chain length for every node of `G_R`. First we set the maximum length of the chain of Red nodes.
 ```
+max_length = 5
 for edge in G_B.edges():
-	node0 = edge[0]
-	Rnode0_out = random.choice(list(n for n in G.nodes[node0]['inR_out'] if logicG.nodes[n]['s']<max_length)+
-	                       list(n for n in G.nodes[node0]['outR_out'] if logicG.nodes[n]['s']<max_length))
-	node1 = edge[1]
-    Rnode1_in = random.choice(list(n for n in G.nodes[node1]['inR_in'] if logicG.nodes[n]['s']==0)+
-                          list(n for n in G.nodes[node1]['outR_in'] if logicG.nodes[n]['s']==0))
+    node0 = edge[0]
+    Rnode0 = random.choice(list(n for n in G_B.nodes[node0]['Rnodes'] if G_R.nodes[n]['s']<max_length))
+	                     
+    node1 = edge[1]
+    Rnode1 = random.choice(G_B.nodes[node1]['Rnodes'])
+    
+    G_R.add_edge(Rnode0, Rnode1)
 
-    name = Rnode1_in.split('_')
-    Rnode1_out = '_'.join(name[:-1]) + '_outR'
-    logicG.add_edge(outPin, inPin)
     
     # Update graph
     logicG.nodes[Rnode1_out]['s'] = max(logicG.nodes[Rnode1_out]['s'], logicG.nodes[Rnode0_out]['s'] + 1)
