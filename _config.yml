@@ -61,4 +61,4 @@ kramdown:
     block:
       line_numbers: true
     span:
-      line_numbers: true
+      line_numbers: false
