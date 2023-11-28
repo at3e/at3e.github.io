@@ -36,12 +36,6 @@ First, import the necessary python libraries.
 import random
 import networkx as nx
 import numpy as np
-import torch
-import pickle
-import itertools
-import matplotlib.pyplot as plt
-import matplotlib.colors as mcolors
-import numpy as np
 random.seed(7)
 ```
 
