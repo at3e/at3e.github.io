@@ -56,13 +56,16 @@ for node in G_B.nodes():
             G_R.nodes[nodeR].update({'score': 0})
 ```
 
-We traverse the graph `G_B`, adding edges to `G_R` along the way while also keeping track of the chain length for every node of `G_R`. First we set the maximum length of the chain of Red nodes.
+We traverse the graph `G_B`, adding edges to `G_R` along the way while also keeping track of the chain length for every node of `G_R`. First we set the maximum length of the chain of Red nodes, `max_length`. Then for node pair `(node0, node1)` in the set of edges of `G_B`, we pick an associated `Rnode0` with score less than `max_length`.
 ```
 max_length = 5
 for edge in G_B.edges():
     node0 = edge[0]
-    Rnode0 = random.choice(list(n for n in G_B.nodes[node0]['Rnodes'] if G_R.nodes[n]['s']<max_length))
-	                     
+    tmp = list(n for n in G_B.nodes[node0]['Rnodes'] if G_R.nodes[n]['s']<max_length)
+    if tmp:
+       Rnode0 = random.choice(list(n for n in G_B.nodes[node0]['Rnodes'] if G_R.nodes[n]['s']<max_length))
+    else:
+       G_B.nodes[node]['Rnodes'].append(node+'_R'+str(G_B.nodes[node]['numR']+1))
     node1 = edge[1]
     Rnode1 = random.choice(G_B.nodes[node1]['Rnodes'])
     
