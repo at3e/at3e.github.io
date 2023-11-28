@@ -56,28 +56,30 @@ for node in G_B.nodes():
             G_R.nodes[nodeR].update({'score': 0})
 ```
 
-We traverse the graph `G_B`, adding edges to `G_R` along the way while also keeping track of the chain length for every node of `G_R`. First we set the maximum length of the chain of Red nodes, `max_length`. Then for node pair `(node0, node1)` in the set of edges of `G_B`, we pick an associated `Rnode0` with score less than `max_length`.
+We traverse the graph `G_B`, adding edges to `G_R` along the way while also keeping track of the chain length for every node of `G_R`. First we set the maximum length of the chain of Red nodes, `max_length`. Then for node pair `(node0, node1)` in the set of edges of `G_B`, we pick an associated `Rnode0` with score less than `max_length`. It may be the case that no such is avaiable, in which case an new node is added to the graph `G_R`. `Rnode1` randomly selected. Once edge is formed between `Rnode0` and `Rnode1`, the scores of all nodes after `Rnode1` must be updated.
 ```
 max_length = 5
+
 for edge in G_B.edges():
     node0 = edge[0]
-    tmp = list(n for n in G_B.nodes[node0]['Rnodes'] if G_R.nodes[n]['s']<max_length)
-    if tmp:
-       Rnode0 = random.choice(list(n for n in G_B.nodes[node0]['Rnodes'] if G_R.nodes[n]['s']<max_length))
+    flag = bool(list(n for n in G_B.nodes[node0]['Rnodes'] if G_R.nodes[n]['score']<max_length))
+    if flag:
+       Rnode0 = random.choice(list(n for n in G_B.nodes[node0]['Rnodes'] if G_R.nodes[n]['score']<max_length))
     else:
-       G_B.nodes[node]['Rnodes'].append(node+'_R'+str(G_B.nodes[node]['numR']+1))
+       Rnode0 = node+'_R'+str(G_B.nodes[node]['numR']+1)
+       G_B.nodes[node]['Rnodes'].append(Rnode0)
+       G_R.add_node(Rnode0)
+       G_R.nodes[Rnode0].update({'score': 0})
+       G_B.nodes[node]['numR'] += 1
+       
     node1 = edge[1]
     Rnode1 = random.choice(G_B.nodes[node1]['Rnodes'])
-    
     G_R.add_edge(Rnode0, Rnode1)
-
     
     # Update graph
-    logicG.nodes[Rnode1_out]['s'] = max(logicG.nodes[Rnode1_out]['s'], logicG.nodes[Rnode0_out]['s'] + 1)
+    G_R.nodes[Rnode1]['score'] = max(logicG.nodes[Rnode1]['score'], logicG.nodes[Rnode0]['score'] + 1)
+    updateNodescores(G_R, Rnode1)
 
-    updateNodescores(G_R, Rnode1_out)
-    
-    G_R.nodes[Rnode1_in]['s'] = logicG.nodes[Rnode1_in]['s'] + 1
 ```
 
 The updateNodescores method is a BFS algorithm that updates the node scores of all successors at every iteration,
