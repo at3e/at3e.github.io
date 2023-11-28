@@ -52,88 +52,10 @@ for node in G.nodes():
     G.nodes[node].update({'IN': random.randint(1, 4), 'OUT': random.randint(1, 6)})
 ```
 
-Next, the graph G is partitioned into one-hop subgraphs as shown below.
 
-![Image](/assets/Graph/BGraph.005.jpeg){: width="65%" align="center"}
-
-`S` is a list of one-hop disjoints subgraphs `sg`.  
-
-```
-# Partition graph
-Node_list = list(G.nodes())
-k = 3
-S = []
-Nodes_visited = []
-
-while len(list(set(Nodes_visited))) < len(G.nodes()):
-    node = random.choice(Node_list)
-    Nodes_visited.append(node)
-    if len(G.out_edges(node))==0:
-        continue
-    loads = list(set(G.successors(node)).difference(set(Nodes_visited)))+[node]
-    Nodes_visited += loads
-    if len(loads)>0:
-        sg = set(loads)
-        S.append(sg)
-    Node_list = list(n for n in G.nodes() if n not in Nodes_visited)
-```
-Next, the node attributes of G' are updated. The graph edges are formed 
-```
-# Form subgraphs
-Gp = nx.DiGraph() # Initialize graph G'
-for sg in S:
-    sg_p = nx.DiGraph()
-    # Initiate node names
-    for node in sg:
-        inRnodes = G.nodes[node]['IN']
-        Ir = 6 # Set the maximum number of inputs 
-        outRnodes = G.nodes[node]['OUT'] // I_R
-        G.nodes[node].update({'I_R': I_R, 'inR_out': list(node+'_inR'+str(i+1)+'_out' for i in range(I_R)),
-                              'outR_in': list(node+'_outR'+str(i+1)+'_in'+ '['+str(j)+']' for i in range(outRnodes) for j in range(4)),
-                              'inR_in': list(node+'_inR'+str(i+1)+'_in'+ '['+str(j)+']' for i in range(inRnodes) for j in range(4)),
-                              'outR_out': list(node+'_outR'+str(i+1)+'_out' for i in range(inRnodes))})
-        # Add nodes to G'
-        for gpnode in G.nodes[node]['inR_out']+G.nodes[node]['outR_in']+G.nodes[node]['inR_in']+G.nodes[node]['outR_out']:
-            sg_p.add_node(gpnode)
-
-        # Assign graph edges
-        inNodes_assigned = []
-        outNodes_assigned = []
-        for node in sg:
-            for edge in G.in_edges(node):
-                if edge[0] not in sg:
-                    continue
-                inNodes = G.nodes[edge[0]]['inR_out']
-
-                if len(inNodes_assigned)==0:
-                    inNode = random.choice(inNodes)
-                elif len([n for n in inNodes if n not in inNodes_assigned]) == 0:
-                    numNodes = len(inNodes)
-                    inNodes = 'N'+str(node)+'_R_in'+str(numNodes+1)
-                    G.nodes[edge[0]]['inR_out'].append(inNode)
-                else:
-                    inNode = random.choice(list(e for e in inNodes if e not in inNodes_assigned))
-                inNodes_assigned.append(inNode)
-                outNodes = G.nodes[node]['outR_in']
-                if len(outNodes_assigned)==0:
-                    outNode = random.choice(outNodes)
-                elif len(list(n for n in outNodes if n not in outNodes_assigned))==0:
-                    continue
-                else:
-                    outNode = random.choice(list(n for n in outNodes if n not in outNodes_assigned))
-                outNodes_assigned.append(outNode)
-                sg_p.add_edge(inNode, outNode)
-        Gp = nx.compose(Gp, sg_p)
-```
-Now comes the interesting part. The subgraphs are now merged in pairs, making sure the same node is not used in any iterations.
-
-
-
-The second approach propagates the graph G, adding edges on the way while also keeping track of the chain length. It is computationally expensive but provides greater accuracy.
-
+We traverse the graph `G`, adding edges to `G_R` along the way while also keeping track of the chain length for every node of `G'`. 
 ```
 for edge in G.edges():
-
 	node0 = edge[0]
 	Rnode0_out = random.choice(list(n for n in G.nodes[node0]['inR_out'] if logicG.nodes[n]['s']<max_length)+
 	                       list(n for n in G.nodes[node0]['outR_out'] if logicG.nodes[n]['s']<max_length))
@@ -148,9 +70,9 @@ for edge in G.edges():
     # Update graph
     logicG.nodes[Rnode1_out]['s'] = max(logicG.nodes[Rnode1_out]['s'], logicG.nodes[Rnode0_out]['s'] + 1)
 
-    updateNodescores(logicG, Rnode1_out)
+    updateNodescores(G_R, Rnode1_out)
     
-    logicG.nodes[Rnode1_in]['s'] = logicG.nodes[Rnode1_in]['s'] + 1
+    G_R.nodes[Rnode1_in]['s'] = logicG.nodes[Rnode1_in]['s'] + 1
 ```
 
 The updateNodescores method is a BFS algorithm that updates the node scores of all successors at every iteration,
