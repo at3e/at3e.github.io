@@ -56,7 +56,10 @@ minima:
 
 markdown: kramdown
 kramdown:
-  syntax_highlighter: rouge
-  syntax_highlighter_opts:
-    block:
-      line_numbers: true
+  syntax_highlighter: pygments
+highlighter: pygments
+# kramdown:
+#   syntax_highlighter: rouge
+#   syntax_highlighter_opts:
+#     block:
+#       line_numbers: true
