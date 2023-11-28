@@ -82,7 +82,7 @@ for edge in G_B.edges():
 
 ```
 
-The updateNodescores method is a BFS algorithm that updates the node scores of all successors at every iteration,
+The updateNodescores method is a BFS algorithm based routine that updates the node scores of all successors.
 ```
 def updateNodescores(G, node):
     visited = [node]
@@ -90,17 +90,14 @@ def updateNodescores(G, node):
     q.append(node)
     while q:
         u = q.pop(0)
-        vnodes_in = list(G.successors(u))
-        if not vnodes_in:
+        v = list(G.successors(u))
+        if not v:
             continue
         else:
-            
-            for vnode in vnodes_in:
-                print(u, G.nodes[u]['s'], list(G.successors(u)))
-                vnode_out = '_'.join(vnode.split('_')[:-1])+"_out"
-                visited.append(vnode_out)
-                if vnode_out not in visited and 'LUT' in vnode_out:
-                    G.nodes[vnode_out]['s'] = max(G.nodes[vnode_out]['s'], G.nodes[u]['s']+1)
-                    q.append(vnode_out)
+            for vnode in v:
+                if vnode not in visited:
+                    G.nodes[vnode]['score'] = max(G.nodes[vnode]['score'], G.nodes[u]['s']+1)
+                    q.append(vnode)
+                    visited.append(vnode)
     return
 ```
