@@ -128,3 +128,52 @@ for sg in S:
         Gp = nx.compose(Gp, sg_p)
 ```
 Now comes the interesting part. The subgraphs are now merged in pairs, making sure the same node is not used in any iterations.
+
+
+
+The second approach propagates the graph G, adding edges on the way while also keeping track of the chain length. It is computationally expensive but provides greater accuracy.
+
+```
+for edge in G.edges():
+
+	node0 = edge[0]
+	Rnode0_out = random.choice(list(n for n in G.nodes[node0]['inR_out'] if logicG.nodes[n]['s']<max_length)+
+	                       list(n for n in G.nodes[node0]['outR_out'] if logicG.nodes[n]['s']<max_length))
+	node1 = edge[1]
+    Rnode1_in = random.choice(list(n for n in G.nodes[node1]['inR_in'] if logicG.nodes[n]['s']==0)+
+                          list(n for n in G.nodes[node1]['outR_in'] if logicG.nodes[n]['s']==0))
+
+    name = Rnode1_in.split('_')
+    Rnode1_out = '_'.join(name[:-1]) + '_outR'
+    logicG.add_edge(outPin, inPin)
+    
+    # Update graph
+    logicG.nodes[Rnode1_out]['s'] = max(logicG.nodes[Rnode1_out]['s'], logicG.nodes[Rnode0_out]['s'] + 1)
+
+    updateNodescores(logicG, Rnode1_out)
+    
+    logicG.nodes[Rnode1_in]['s'] = logicG.nodes[Rnode1_in]['s'] + 1
+```
+
+The updateNodescores method is a BFS algorithm that updates the node scores of all successors at every iteration,
+```
+def updateNodescores(G, node):
+    visited = [node]
+    q = [node]
+    q.append(node)
+    while q:
+        u = q.pop(0)
+        vnodes_in = list(G.successors(u))
+        if not vnodes_in:
+            continue
+        else:
+            
+            for vnode in vnodes_in:
+                print(u, G.nodes[u]['s'], list(G.successors(u)))
+                vnode_out = '_'.join(vnode.split('_')[:-1])+"_out"
+                visited.append(vnode_out)
+                if vnode_out not in visited and 'LUT' in vnode_out:
+                    G.nodes[vnode_out]['s'] = max(G.nodes[vnode_out]['s'], G.nodes[u]['s']+1)
+                    q.append(vnode_out)
+    return
+```
