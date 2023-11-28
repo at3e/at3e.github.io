@@ -29,7 +29,7 @@ Each Red box can have a maximum of `Ir` incoming edges. There can be multiple ou
 
 *Figure 4: Set of valid and invalid edges of graph G'*
 
-I worked out an approach to this problem. Let's walk through with a code. 
+I worked out an approach to this problem. Let's walk through along with a code. 
 First, import the necessary python libraries.
 
 ```
@@ -45,10 +45,9 @@ import numpy as np
 random.seed(7)
 ```
 
-Given a random Directed acyclic graph `G` (there are several ways to create a DAG, a simple one can be found <a href="https://gist.github.com/flekschas/0ea70dec4d92bc706e61" rel="noreferrer">here</a>)similar to the one shown earlier. Red boxes are randomly assigned to each node and are divided into two groups 'IN' and 'OUT'. These nodes of the graph that we want to derive.
+Given a random Directed acyclic graph `G_B`, similar to the DAG G with Blue nodes shown in Figure 1. There are several ways to create a DAG, a simple one can be found <a href="https://gist.github.com/flekschas/0ea70dec4d92bc706e61" rel="noreferrer">here</a> . Red boxes are randomly assigned to each node and are divided into two groups 'IN' and 'OUT'. These nodes of the graph `G_R` that we want to derive.
 ```
 for node in G.nodes():
-    # G.nodes[node].update({'IN': G.in_degree(node), 'OUT': G.out_degree(node)+1})
     G.nodes[node].update({'IN': random.randint(1, 4), 'OUT': random.randint(1, 6)})
 ```
 
