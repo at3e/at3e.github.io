@@ -4,7 +4,7 @@ use_math: true
 title: On a graph problem
 ---
 
-Lately, I came across this problem for one of my projects. I will explain in here and present an approach to solve it.
+Lately, I came across this problem for one of my projects. I will present a simplified version of the problem over here and present an approach to solve it.
 Start with a directed graph with nodes shown in blue. A directed graph or a "digraph," is a data structure representation that consists of a set of nodes (or vertices) and a set of directed edges (or arcs) that connect pairs of nodes. Each edge is directed from one node to another that indicates, for example, the direction of propagation of information from a node to the next. A directed acyclic graph(DAG) is a digraph with no directed cycles.
 
 ![Image](/assets/Graph/BGraph.001.jpeg){: width="65%" align="center"}
@@ -23,7 +23,7 @@ Here’s the problem:  Derive a graph G' of the Red boxes, given the underlyin
 
 *Figure 3: Graph G and nodes of graph G'*
 
-Each Red box can have a maximum of `Ir` incoming edges. There can be multiple outgoing edges. But at least one input or output edge must be used. But while constructing the graph `G'`, no set of Red boxes can form a chain of more than N stages. For example, if N=3, an invalid set of edges the set of edges is marked using Red solid lines. Similarly the set of edges marked using Green solid lines connecting a chain of three nodes is valid.
+Each Red box can have multiple incoming and outgoing edges. But at least one input or output edge must be used. But while constructing the graph `G'`, no set of Red boxes can form a chain of more than N stages. For example, if N=3, an invalid set of edges the set of edges is marked using Red solid lines. Similarly the set of edges marked using Green solid lines connecting a chain of three nodes is valid.
 
 ![Image](/assets/Graph/BGraph.004.jpeg){: width="65%" align="center"}
 
@@ -45,16 +45,23 @@ import numpy as np
 random.seed(7)
 ```
 
-Given a random Directed acyclic graph `G_B`, similar to the DAG G with Blue nodes shown in Figure 1. There are several ways to create a DAG, a simple one can be found <a href="https://gist.github.com/flekschas/0ea70dec4d92bc706e61" rel="noreferrer">here</a> . Red boxes are randomly assigned to each node and are divided into two groups 'IN' and 'OUT'. These nodes of the graph `G_R` that we want to derive.
+Given a random Directed acyclic graph `G_B`, similar to the DAG G with Blue nodes shown in Figure 1. There are several ways to create a DAG, a simple one can be found <a href="https://gist.github.com/flekschas/0ea70dec4d92bc706e61" rel="noreferrer">here</a> . Red boxes are randomly assigned to each node and are divided into two groups 'IN' and 'OUT'. These nodes of the graph `G_R` that we want to derive. Let the number of Red nodes assigned to each node of `G_B` be `Rnodes`. In this case I will limit it till 4. 
 ```
-for node in G.nodes():
-    G.nodes[node].update({'IN': random.randint(1, 4), 'OUT': random.randint(1, 6)})
+for node in G_B.nodes():
+    Rnodes = random.randint(1, 4)
+    G_B.nodes[node].update({'Rnodes': Rnodes})
+     G.nodes[node]['IN']
+    G.nodes[node].update({'inR_out': list(node+'_inR'+str(i+1)+'_out' for i in range(I_R)),
+                              'outR_in': list(node+'_outR'+str(i+1)+'_in'+ '['+str(j)+']' for i in range(outRnodes) for j in range(4)),
+                              'inR_in': list(node+'_inR'+str(i+1)+'_in'+ '['+str(j)+']' for i in range(inRnodes) for j in range(4)),
+                              'outR_out': list(node+'_outR'+str(i+1)+'_out' for i in range(inRnodes))})
+        # Add nodes to G'
 ```
 
 
-We traverse the graph `G`, adding edges to `G_R` along the way while also keeping track of the chain length for every node of `G'`. 
+We traverse the graph `G_B`, adding edges to `G_R` along the way while also keeping track of the chain length for every node of `G_R`. Every 
 ```
-for edge in G.edges():
+for edge in G_B.edges():
 	node0 = edge[0]
 	Rnode0_out = random.choice(list(n for n in G.nodes[node0]['inR_out'] if logicG.nodes[n]['s']<max_length)+
 	                       list(n for n in G.nodes[node0]['outR_out'] if logicG.nodes[n]['s']<max_length))
