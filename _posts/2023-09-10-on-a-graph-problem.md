@@ -45,7 +45,7 @@ import numpy as np
 random.seed(7)
 ```
 
-Given a random Directed acyclic graph `G` (there are several ways to create a DAG, a simple one can be found [here]({% post_url https://gist.github.com/flekschas/0ea70dec4d92bc706e61 %})similar to the one shown earlier. Red boxes are randomly assigned to each node and are divided into two groups 'IN' and 'OUT'. These nodes of the graph that we want to derive.
+Given a random Directed acyclic graph `G` (there are several ways to create a DAG, a simple one can be found <a href="https://gist.github.com/flekschas/0ea70dec4d92bc706e61" rel="noreferrer">here</a>)similar to the one shown earlier. Red boxes are randomly assigned to each node and are divided into two groups 'IN' and 'OUT'. These nodes of the graph that we want to derive.
 ```
 for node in G.nodes():
     # G.nodes[node].update({'IN': G.in_degree(node), 'OUT': G.out_degree(node)+1})
