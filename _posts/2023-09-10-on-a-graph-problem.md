@@ -101,3 +101,4 @@ def updateNodescores(G, node):
                     visited.append(vnode)
     return
 ```
+This method can be computationally intensive for large graphs. Do let me know if you have suggestions!
