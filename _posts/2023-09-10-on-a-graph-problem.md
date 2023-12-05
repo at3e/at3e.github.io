@@ -103,4 +103,4 @@ def updateNodescores(G, node):
 ```
 This method can be computationally intensive for large graphs. Do let me know if you have suggestions!
 
-![](/assets/Graph/27197181_MotionElements_awkward-dumbfounded-hd.mp4)
+![](https://github.com/at3e/at3e.github.io/tree/main/assets/Graph/27197181_MotionElements_awkward-dumbfounded-hd.mp4)
