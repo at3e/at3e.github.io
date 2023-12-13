@@ -102,11 +102,8 @@ def updateNodescores(G, node):
     return
 ```
 This method can be computationally intensive for large graphs. Do let me know if you have suggestions!
-![](https://www.youtube.com/watch?v=Ptk_1Dc2iPY)
-
-![](//www.youtube.com/watch?v=Ptk_1Dc2iPY?width=800&height=500)
+<img src="{{site.baseurl | prepend: site.url}}assets/Graph/27197181_MotionElements_awkward-dumbfounded-hd.mp4" alt="zigzag" />
 <video autoplay muted loop>
   <source src="https://github.com/at3e/at3e.github.io/tree/main/assets/Graph/27197181_MotionElements_awkward-dumbfounded-hd.mp4" type="video/mp4">
   <p>Your browser does not support the video element.</p>
 </video>
-![](https://github.com/at3e/at3e.github.io/tree/main/assets/Graph/27197181_MotionElements_awkward-dumbfounded-hd.mp4)
