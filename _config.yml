@@ -9,7 +9,7 @@ description: >
   problems in signal processing. Lately I work with graphs a lot. 
 
 # Build settings
-url: 'https://https://at3e.github.io/' # your main domain
+url: 'https://at3e.github.io/' # your main domain
 baseurl: '' # if you're using custom domain keep this blank example: baseurl: ''
 
 theme: minima
