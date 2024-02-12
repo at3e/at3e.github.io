@@ -84,6 +84,31 @@ for edge in G_B.edges():
 
 The updateNodescores method is a BFS algorithm based routine that updates the node scores of all successors.
 ```
+def checkNodescores(G, node, max_score):
+    flag=True
+    visited = [node]
+    q = [node]
+    if G.nodes[node]['s'] >= max_score:
+        flag = False
+        return flag
+    while q:
+        u = q.pop(0)
+        vnodes_in = list(G.successors(u))
+        if not vnodes_in:
+            continue
+        else:
+            
+            for vnode in vnodes_in:
+                vnode_out = '_'.join(vnode.split('_')[:-1])+"_out"
+                
+                if vnode_out not in visited and 'LUT' in vnode_out:
+                    if G.nodes[vnode_out]['s'] >= max_score:
+                        flag = False
+                        return flag
+                    q.append(vnode_out)
+                visited.append(vnode_out)
+    return flag
+
 def updateNodescores(G, node):
     visited = [node]
     q = [node]
@@ -98,7 +123,7 @@ def updateNodescores(G, node):
                 if vnode not in visited:
                     G.nodes[vnode]['score'] = max(G.nodes[vnode]['score'], G.nodes[u]['s']+1)
                     q.append(vnode)
-                    visited.append(vnode)
+                visited.append(vnode)
     return
 ```
 This method can be computationally intensive for large graphs. Do let me know if you have suggestions!
