@@ -23,7 +23,7 @@ Here’s the problem:  Derive a graph G' of the Red boxes, given the underlyin
 
 *Figure 3: Graph G and nodes of graph G'*
 
-Each Red box can have multiple incoming and outgoing edges. But at least one input or output edge must be used. But while constructing the graph `G'`, no set of Red boxes can form a chain of more than N stages. For example, if N=3, an invalid set of edges the set of edges is marked using Red solid lines. Similarly the set of edges marked using Green solid lines connecting a chain of three nodes is valid.
+Each Red box can have multiple incoming and outgoing edges. But at least one input or output edge must be used. But while constructing the graph `G'`, no set of Red boxes can form a chain greater than N stages. For example, if N=3, an invalid set of edges the set of edges is marked using Red solid lines. Similarly the set of edges marked using Green solid lines connecting a chain of three nodes is valid.
 
 ![Image](/assets/Graph/BGraph.004.jpeg){: width="65%" align="center"}
 
@@ -42,7 +42,7 @@ random.seed(7)
 Given a random Directed acyclic graph `G_B` created using the `networkx` package, similar to the DAG G with Blue nodes shown in Figure 1. There are several ways to create a DAG, a simple one can be found <a href="https://gist.github.com/flekschas/0ea70dec4d92bc706e61" rel="noreferrer">here</a> . Red boxes are randomly assigned to each node. These nodes of the graph `G_R` that we want to derive. Let the number of Red nodes assigned to each node of `G_B` be `numR`. In this case I will limit it till 4. These nodes are added to the empty graph `G_R`. Each node of `G_R` has a `score`, initialized to 0. The `score` keeps track of the levels of Red nodes preceeding it.
 
 ```
-# Initialize G_R
+## Initialize G_R
 G_R = nx.DiGraph()
 
 for node in G_B.nodes():
@@ -53,6 +53,7 @@ for node in G_B.nodes():
     # Add nodes to G_R
     for nodeR in G_B.nodes[node]['Rnodes']:
             G_R.add_node(nodeR)
+            # Initialize the score to zero
             G_R.nodes[nodeR].update({'score': 0})
 ```
 
@@ -62,10 +63,13 @@ max_length = 5
 
 for edge in G_B.edges():
     node0 = edge[0]
+    # Check if a red node is available 
     flag = bool(list(n for n in G_B.nodes[node0]['Rnodes'] if G_R.nodes[n]['score']<max_length))
     if flag:
+       # Select a red node randomly
        Rnode0 = random.choice(list(n for n in G_B.nodes[node0]['Rnodes'] if G_R.nodes[n]['score']<max_length))
     else:
+       # Introduce a new red node
        Rnode0 = node+'_R'+str(G_B.nodes[node]['numR']+1)
        G_B.nodes[node]['Rnodes'].append(Rnode0)
        G_R.add_node(Rnode0)
@@ -97,11 +101,10 @@ def checkNodescores(G, node, max_score):
         if not vnodes_in:
             continue
         else:
-            
             for vnode in vnodes_in:
                 vnode_out = '_'.join(vnode.split('_')[:-1])+"_out"
-                
-                if vnode_out not in visited and 'LUT' in vnode_out:
+
+                if vnode_out not in visited:
                     if G.nodes[vnode_out]['s'] >= max_score:
                         flag = False
                         return flag
