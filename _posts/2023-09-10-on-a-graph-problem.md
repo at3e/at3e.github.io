@@ -64,10 +64,10 @@ max_length = 5
 for edge in G_B.edges():
     node0 = edge[0]
     # Check if a red node is available 
-    flag = bool(list(n for n in G_B.nodes[node0]['Rnodes'] if G_R.nodes[n]['score']<max_length))
+    flag = bool(list(n for n in G_B.nodes[node0]['Rnodes'] if G_R.nodes[n]['score'] < max_length))
     if flag:
        # Select a red node randomly
-       Rnode0 = random.choice(list(n for n in G_B.nodes[node0]['Rnodes'] if G_R.nodes[n]['score']<max_length))
+       Rnode0 = random.choice(list(n for n in G_B.nodes[node0]['Rnodes'] if G_R.nodes[n]['score'] < max_length))
     else:
        # Introduce a new red node
        Rnode0 = node+'_R'+str(G_B.nodes[node]['numR']+1)
@@ -102,14 +102,11 @@ def checkNodescores(G, node, max_score):
             continue
         else:
             for vnode in vnodes_in:
-                vnode_out = '_'.join(vnode.split('_')[:-1])+"_out"
-
-                if vnode_out not in visited:
-                    if G.nodes[vnode_out]['s'] >= max_score:
-                        flag = False
-                        return flag
-                    q.append(vnode_out)
-                visited.append(vnode_out)
+                if vnode not in visited and G.nodes[vnode]['s'] >= max_score:
+                    flag = False
+                    return flag
+                q.append(vnode)
+                visited.append(vnode)
     return flag
 
 def updateNodescores(G, node):
