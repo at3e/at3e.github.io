@@ -10,16 +10,10 @@ We get started with the AND construct. This is for engineers who are stuck with 
 
 We begin with the truth table of binary AND. 
 
-\begin{table}
+<table class="center">
+    ...
+</table>
 
-\end{table}
-
-table {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 40%;
-}
 
 Now, let's compare this with the binary XOR, which infact is a linear operation.
 
