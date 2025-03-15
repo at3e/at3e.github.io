@@ -9,6 +9,11 @@ This article is a quick reference guide for beginners towards the essentials of 
 We get started with the AND construct. This is for engineers who are stuck with an older Gurobi version which does not allow multiplication between variables. Additionally, it serves as a standard example of exacting a non-linear constraint from an approximate linear constraint.
 
 We begin with the truth table of binary AND. 
+
+\begin{table}
+
+\end{table}
+
 table {
   display: block;
   margin-left: auto;
