@@ -11,7 +11,7 @@ We get started with the AND construct. This is for engineers who are stuck with 
 We begin with the truth table of binary AND. 
 
 <table class="center">
- {% for row in assets.data %}
+ {% for row in site.assets.data %}
     {% if forloop.first %}
     <tr>
       {% for pair in row %}
