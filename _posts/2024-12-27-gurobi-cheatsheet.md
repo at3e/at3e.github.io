@@ -10,13 +10,13 @@ We get started with the AND construct. This is for engineers who are stuck with 
 
 We begin with the truth table of binary AND. 
 
-```
+
 | Priority apples | Second priority | Third priority |
 |-------|--------|---------|
 | ambrosia | gala | red delicious |
 | pink lady | jazz | macintosh |
 | honeycrisp | granny smith | fuji |
-``` 
+
 
 Now, let's compare this with the binary XOR, which infact is a linear operation.
 
