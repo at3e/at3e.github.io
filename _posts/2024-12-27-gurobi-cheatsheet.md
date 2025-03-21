@@ -11,12 +11,14 @@ We get started with the AND construct. This is for engineers who are stuck with 
 **Binary AND**
 We begin with the truth table of binary AND. 
 
+z = x.y
 
-| Priority apples | Second priority | Third priority |
+| x | y | z |
 |-------|--------|---------|
-| ambrosia | gala | red delicious |
-| pink lady | jazz | macintosh |
-| honeycrisp | granny smith | fuji |
+| 0 | 0 | 0 |
+| 0 | 1 | 0 |
+| 1 | 0 | 0 |
+| 1 | 1 | 1 |
 
 
 Now, let's compare this with the binary XOR, which infact is a linear operation.
