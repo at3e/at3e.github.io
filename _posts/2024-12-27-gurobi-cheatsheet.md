@@ -11,7 +11,9 @@ We get started with the AND construct. This is for engineers who are stuck with 
 **Binary AND**
 We begin with the truth table of binary AND. 
 
+```
 z = x.y
+```
 
 | x | y | z |
 |-------|--------|---------|
