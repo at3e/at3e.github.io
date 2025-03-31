@@ -23,5 +23,6 @@ z = x.y
 | 0 | 1 | 0 |
 | 1 | 0 | 0 |
 | 1 | 1 | 1 |  ![Image](/assets/Gurobi/figure1.png){: width="40%" align="center"}
+
 Now, let's compare this with the binary XOR, which infact is a linear operation.
 
