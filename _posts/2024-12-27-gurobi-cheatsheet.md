@@ -11,7 +11,7 @@ We get started with the AND construct. This is for engineers who are stuck with 
 **Binary AND**
 
 
-We begin with the truth table of binary AND. 
+We begin with the truth table of binary AND, and the plot of the same.
 
 ```
 z = x.y
@@ -22,8 +22,6 @@ z = x.y
 | 0 | 0 | 0 |
 | 0 | 1 | 0 |
 | 1 | 0 | 0 |
-| 1 | 1 | 1 |
-
-![Image](/assets/Gurobi/figure1.png){: width="40%" align="center"}
+| 1 | 1 | 1 |  ![Image](/assets/Gurobi/figure1.png){: width="40%" align="center"}
 Now, let's compare this with the binary XOR, which infact is a linear operation.
 
