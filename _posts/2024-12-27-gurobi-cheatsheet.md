@@ -25,6 +25,6 @@ z = x.y
 | 1 | 1 | 1 |  
 
 ![Image](/assets/Gurobi/figure1.png){: width="40%" align="center"}
-
+*Figure 1: Points corresponding to (0,0), (0,1), and (1,0) are represented by red dots, indicating a value of 0 in the AND truth table. The point (1,1), however, is marks the output 1. *
 Now, let's compare this with the binary XOR, which infact is a linear operation.
 
