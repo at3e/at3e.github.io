@@ -24,7 +24,7 @@ z = x.y
 | 1 | 0 | 0 |
 | 1 | 1 | 1 |  
 
-![Image](/assets/Gurobi/figure1.png){: width="40%" align="center"}
+![Image](/assets/Gurobi/figure1.png){: width="30%" align="center"}
 
 *Figure 1: Points corresponding to (0,0), (0,1), and (1,0) are represented by red dots, indicating a value of 0 in the AND truth table. The point (1,1), is marks the output 1.*
 
@@ -39,9 +39,17 @@ Now, let's compare this with the binary XOR, which infact is a linear operation.
 
 With respect to the binary XOR, binary AND represents the shaded region.
 
-![Image](/assets/Gurobi/figure2.png){: width="40%" align="center"}
+![Image](/assets/Gurobi/figure2.png){: width="30%" align="center"}
 
-*Figure 1: Line representing binary XOR equation passes through points (0,1), and (1,0).*
+*Figure 2: Line representing binary XOR equation passes through points (0,1), and (1,0). The shaded region represents feasibility for binary AND.*
+
+The shaded region in Figure 2 is represented as,
+
+
+\begin{equation}
+z \geq x + y
+\end{equation}
+
 
 while the XOR operation is linear, defining the binary AND construct requires additional constraints due to its non-linear nature. Specifically, the fact that variables are binary implies that no single variable can exceed the values of the others involved in the operation. To accurately and completely define the AND construct in this case, we must introduce two supplementary constraints to bound the solution space effectively.
 
