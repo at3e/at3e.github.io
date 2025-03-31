@@ -46,9 +46,7 @@ With respect to the binary XOR, binary AND represents the shaded region.
 The shaded region in Figure 2 is represented as,
 
 ```
-\begin{equation}
-z \geq x + y
-\end{equation}
+z ≥ x + y - 1 
 ```
 
 while the XOR operation is linear, defining the binary AND construct requires additional constraints due to its non-linear nature. Specifically, the fact that variables are binary implies that no single variable can exceed the values of the others involved in the operation. To accurately and completely define the AND construct in this case, we must introduce two supplementary constraints to bound the solution space effectively.
