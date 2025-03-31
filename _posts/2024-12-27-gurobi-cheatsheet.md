@@ -55,4 +55,10 @@ while the XOR operation is linear, defining the binary AND construct requires ad
 z ≤ x
 z ≤ y
 ```
-By visualizing these relationships and constraints through the image and understanding their mathematical underpinnings, we can appreciate the broader methodology of translating non-linear operations into piece-wise linear constraints. This approach is foundational in optimization problems where linear representations simplify computations and improve compatibility with certain solvers.
+The corresponding visualization is,
+
+![Image](/assets/Gurobi/figure3.png){: width="30%" align="center"}
+
+*Figure 3: The final solution space.*
+
+
