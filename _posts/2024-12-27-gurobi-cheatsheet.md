@@ -49,6 +49,10 @@ The shaded region in Figure 2 is represented as,
 z ≥ x + y - 1 
 ```
 
-while the XOR operation is linear, defining the binary AND construct requires additional constraints due to its non-linear nature. Specifically, the fact that variables are binary implies that no single variable can exceed the values of the others involved in the operation. To accurately and completely define the AND construct in this case, we must introduce two supplementary constraints to bound the solution space effectively.
+while the XOR operation is linear, defining the binary AND construct requires additional constraints due to its non-linear nature. The variables x,y and z are binary, so no single variable can exceed the values of the others. To accurately and completely define the binary AND construct in this case, two additional constraints bound the solution space to contain the point (1,1) only.
 
+```
+z ≤ x
+z ≤ y
+```
 By visualizing these relationships and constraints through the image and understanding their mathematical underpinnings, we can appreciate the broader methodology of translating non-linear operations into piece-wise linear constraints. This approach is foundational in optimization problems where linear representations simplify computations and improve compatibility with certain solvers.
