@@ -26,7 +26,7 @@ z = x.y
 
 ![Image](/assets/Gurobi/figure1.png){: width="40%" align="center"}
 
-*Figure 1: Points corresponding to (0,0), (0,1), and (1,0) are represented by red dots, indicating a value of 0 in the AND truth table. The point (1,1), however, is marks the output 1. *
+*Figure 1: Points corresponding to (0,0), (0,1), and (1,0) are represented by red dots, indicating a value of 0 in the AND truth table. The point (1,1), is marks the output 1.*
 
 Now, let's compare this with the binary XOR, which infact is a linear operation.
 
@@ -38,3 +38,11 @@ Now, let's compare this with the binary XOR, which infact is a linear operation.
 | 1 | 1 | 0 |  
 
 With respect to the binary XOR, binary AND represents the shaded region.
+
+![Image](/assets/Gurobi/figure2.png){: width="40%" align="center"}
+
+*Figure 1: Line representing binary XOR equation passes through points (0,1), and (1,0).*
+
+while the XOR operation is linear, defining the binary AND construct requires additional constraints due to its non-linear nature. Specifically, the fact that variables are binary implies that no single variable can exceed the values of the others involved in the operation. To accurately and completely define the AND construct in this case, we must introduce two supplementary constraints to bound the solution space effectively.
+
+By visualizing these relationships and constraints through the image and understanding their mathematical underpinnings, we can appreciate the broader methodology of translating non-linear operations into piece-wise linear constraints. This approach is foundational in optimization problems where linear representations simplify computations and improve compatibility with certain solvers.
