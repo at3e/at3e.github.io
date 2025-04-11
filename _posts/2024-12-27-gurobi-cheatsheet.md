@@ -14,7 +14,7 @@ We get started with the AND construct. This is for engineers who are stuck with 
 We begin with the truth table of binary AND, and the plot of the same.
 
 ```
-z = x.y
+z = x⋅y
 ```
 
 | x | y | z |
@@ -63,8 +63,10 @@ The corresponding visualization is,
 
 
 The idea is extended for multiplication between a binary variable and an integer/continuous variable. Let `x` be a continuous/integer variable with a known upper bound `U`, and `y` be a binary variable. `z` is their product.
-Add the following constraints:
-z <= u * y
+These are the constraints that work,
+```
+z <= U⋅y
 z <= x
-z >= x - u * (1 - y)
+z >= x - U⋅(1 - y)
 y >= 0
+```
