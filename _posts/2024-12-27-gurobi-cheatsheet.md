@@ -62,3 +62,9 @@ The corresponding visualization is,
 *Figure 3: The final solution space.*
 
 
+The idea is extended for multiplication between a binary variable and an integer/continuous variable. Let `x` be a continuous/integer variable with a known upper bound `U`, and `y` be a binary variable. `z` is their product.
+Add the following constraints:
+z <= u * y
+z <= x
+z >= x - u * (1 - y)
+y >= 0
