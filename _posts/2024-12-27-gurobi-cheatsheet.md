@@ -68,5 +68,22 @@ These are the constraints that work,
 z <= U⋅y
 z <= x
 z >= x - U⋅(1 - y)
-y >= 0
 ```
+The last equation is an example of the if-else construct, explained next.
+
+**If-else**
+
+Gurobi’s Python API does not provide an inbuilt if-else construct. But the if-else constraint can be decomposed into linear constraints using auxiliary variables. Let us take up a simple case:  
+
+Here, we use what is called the big-M constraint.
+Let 
+
+
+To prove the same by proof by contradiction,
+
+Let , and , it is easy to check that LHS is greater than zero, while RHS is not. Similarly, assuming  can disprove the same.
+
+
+
+
+
