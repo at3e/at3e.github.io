@@ -4,7 +4,12 @@ use_math: true
 title: On envelope extraction using cross coherence
 ---
 
-Temporal demodulation is a widely employed technique for signal characterisation. Here, I propose an envelope extraction method for periodic signals in the presence of ambient noise and overlapping signal and noise characteristics. The design of a filter without prior knowledge of the noise characteristics can be challenging. Given a clean template signal, cross-coherence can be used to score the signal purity against time.
+
+Heart sound signals, particularly the first (S1) and second (S2) heart sounds, hold significant diagnostic value in medicine. The visual representation of heart sounds is called the phonocardiogram (PCG). PCG signal analysis can reveal vital information about heart function and abnormalities. Envelope extraction is essential for detecting S1 and S2 peaks in the phonocardiogram (PCG) signal because heart sounds are often embedded within noise and other acoustic components. It captures the slowly varying amplitude of the rapidly oscillating carrier signal.
+![Image](/assets/coherence-plot.svg){:style="display:block; margin-left:auto; margin-right:auto"}
+*Source:[https://en.wikipedia.org/wiki/Envelope_detector#](https://en.wikipedia.org/wiki/Envelope_detector#)*
+
+Here, I propose an envelope extraction method for periodic signals in the presence of ambient noise and overlapping signal and noise characteristics. The design of a filter without prior knowledge of the noise characteristics can be challenging. Given a clean template signal, cross-coherence can be used to score the signal purity against time.
 
 Let $ r(t) $ be a clean reference signal of time period $ T $. In this example, we will consider the heart sound signal. 
 ![Image](/assets/st.svg){: style="float: center" width="50%"}
