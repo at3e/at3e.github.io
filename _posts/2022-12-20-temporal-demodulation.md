@@ -9,7 +9,7 @@ Heart sound signals, particularly the first (S1) and second (S2) heart sounds, h
 ![Image](/assets/C_Envelope_follower.png){:style="display:block; margin-left:auto; margin-right:auto; width:40%"}
 *Source:[https://en.wikipedia.org/wiki/Envelope_detector#](https://en.wikipedia.org/wiki/Envelope_detector#)*
 
-Here, I propose an envelope extraction method for periodic signals in the presence of ambient noise and overlapping signal and noise characteristics. The design of a filter without prior knowledge of the noise characteristics can be challenging. Given a clean template signal, cross-coherence can be used to score the signal purity against time.
+Here, I propose an envelope extraction method for periodic signals in the presence of ambient noise and overlapping signal and noise characteristics. The design of such a filter without prior knowledge of the noise characteristics can be challenging. Given a clean template signal, cross-coherence can be used to score the signal purity against time.
 
 Let $ r(t) $ be a clean reference signal of time period $ T $. In this example, we will consider the heart sound signal. 
 ![Image](/assets/st.svg){: style="float: center" width="50%"}
