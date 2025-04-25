@@ -73,8 +73,7 @@ The last equation is an example of the if-else construct, explained next.
 
 **If-else**
 
-Gurobi’s Python API does not provide an inbuilt if-else construct. But the if-else constraint can be decomposed into linear constraints using auxiliary variables. Let us take up a simple case: 
-
+Gurobi’s Python API does not provide an inbuilt if-else construct. But the if-else constraint can be decomposed into linear constraints using auxiliary variables. Let us take up a simple case:
 $$
 \begin{aligned} 
 b =
