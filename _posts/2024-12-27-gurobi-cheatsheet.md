@@ -78,7 +78,7 @@ Gurobi’s Python API does not provide an inbuilt if-else construct. But the if-
 \begin{equation} 
 b =
 \begin{cases} 
-1, & \text{if } x < y \\
+1, & \text{if } x < y \\\\
 0, & \text{otherwise}
 \end{cases}
 \end{equation}
