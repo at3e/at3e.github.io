@@ -1,90 +1,62 @@
 ---
 layout: post
 use_math: true
-title: The Gurobi Cheatsheet for Integer Non-linear Programming Formulation 
+title: On envelope extraction using cross coherence
 ---
 
-Optimisation problems require translating real-life constraints and objectives into mathematical expressions that a solver, like Gurobi, can efficiently process. While Gurobi is a powerful optimisation engine, the key to harnessing its full potential is crafting well-structured models.
-This article is a quick reference guide for beginners towards the essentials of ILP formulation. Also, it is a compilation of challenges I faced while formulating non-linear constraints on older Gurobi versions in the pre-ChatGPT era. This article attempts to understand how to decompose non-linear expressions into constituent linear expressions, which are expected to be utilized in tackling scheduling, resource allocation, or combinatorial optimisation problems.
-We get started with the AND construct. This is for engineers who are stuck with an older Gurobi version which does not allow multiplication between variables. Additionally, it serves as a standard example of exacting a non-linear constraint from an approximate linear constraint.
 
-**Binary AND**
+Heart sound signals, particularly the first (S1) and second (S2) heart sounds, hold significant diagnostic value in medicine. The visual representation of heart sounds is called the phonocardiogram (PCG). PCG signal analysis can reveal vital information about heart function and abnormalities. Envelope extraction is essential for detecting S1 and S2 peaks in the phonocardiogram (PCG) signal because heart sounds are often embedded within noise and other acoustic components. It captures the slowly varying amplitude of the rapidly oscillating carrier signal.
+![Image](/assets/C_Envelope_follower.png){:style="display:block; margin-left:auto; margin-right:auto; width:50%"}
+*Figure 1: Carrier signal and envelope (source:[https://en.wikipedia.org/wiki/Envelope_detector#](https://en.wikipedia.org/wiki/Envelope_detector#))*
 
+Here, I present an envelope extraction method for periodic signals in the presence of ambient noise and overlapping signal and noise characteristics. The design of such a filter without prior knowledge of the noise characteristics can be challenging. So given a clean template signal, I use cross-coherence with a template signal of similar origin to score the signal purity against time.
 
-We begin with the truth table of binary AND, and the plot of the same.
+![Image](/assets/st.svg){:style="display:block; margin-left:auto; margin-right:auto; width:50%"}
+*Figure 1: Clean PCG signal $r(t)$*
 
-```
-z = x⋅y
-```
+Let $ r(t) $ be a clean reference signal of time period $ T $. For example, consider the heart sound signal in Figure 1. The PCG signal is an approximately periodic signal, with each period consisting of at least two distinct sounds, namely the S1 and S2, the systolic and diastolic movements of the heart respectively.
+The test signal $s(t)$ of any duration has characteristics similar to $ r(t) $ but noisy. We consider a window length $ w $ and hop-length $ h $.
+The window length is approximately one time period of the reference signal. The reference signal has a uniform period and consistently maintains the S1/S2 amplitudes. When the signals are windowed, the complex-coherency of the windowed signals $ r'(t) $ and $ s'(t) $,
 
-| x | y | z |
-|--|--|--|
-| 0 | 0 | 0 |
-| 0 | 1 | 0 |
-| 1 | 0 | 0 |
-| 1 | 1 | 1 |  
-
-![Image](/assets/Gurobi/figure1.png){: width="30%" align="center"}
-
-*Figure 1: Points corresponding to (0,0), (0,1), and (1,0) are represented by red dots, indicating a value of 0 in the AND truth table. The point (1,1), is marks the output 1.*
-
-Now, let's compare this with the binary XOR, which infact is a linear operation.
-
-| x | y | z |
-|--|--|--|
-| 0 | 0 | 0 |
-| 0 | 1 | 1 |
-| 1 | 0 | 1 |
-| 1 | 1 | 0 |  
-
-With respect to the binary XOR, binary AND represents the shaded region.
-
-![Image](/assets/Gurobi/figure2.png){: width="30%" align="center"}
-
-*Figure 2: Line representing binary XOR equation passes through points (0,1), and (1,0). The shaded region represents feasibility for binary AND.*
-
-The shaded region in Figure 2 is represented as,
-
-```
-z ≥ x + y - 1 
-```
-
-while the XOR operation is linear, defining the binary AND construct requires additional constraints due to its non-linear nature. The variables x,y and z are binary, so no single variable can exceed the values of the others. To accurately and completely define the binary AND construct in this case, two additional constraints bound the solution space to contain the point (1,1) only.
-
-```
-z ≤ x
-z ≤ y
-```
-The corresponding visualization is,
-
-![Image](/assets/Gurobi/figure3.png){: width="30%" align="center"}
-
-*Figure 3: The final solution space.*
-
-
-The idea is extended for multiplication between a binary variable and an integer/continuous variable. Let `x` be a continuous/integer variable with a known upper bound `U`, and `y` be a binary variable. `z` is their product.
-These are the constraints that work,
-```
-z <= U⋅y
-z <= x
-z >= x - U⋅(1 - y)
-```
-The last equation is an example of the if-else construct, explained next.
-
-**If-else**
-
-Gurobi’s Python API does not provide an inbuilt if-else construct. But the if-else constraint can be decomposed into linear constraints using auxiliary variables. Let us take up a simple case:
-
-Here, we use what is called the big-M constraint. Let $M$ be a large number. Then,
 \begin{equation}
-x - y \geq -M \cdot (1 - b)
+C_{r's'} = \frac{\phi_{r's'}}{\sqrt{\phi_{r'r'}\phi_{s's'}}}
 \end{equation}
 
-This can be proved by contradiction.
+where  $ \phi_{r's'} $ is the cross-spectrum of the signals, $ \phi_{r'r'} $ and $ \phi_{s's'} $ are the respective power spectral densities (PSDs). I have used the Welch algorithm to estimate the PSD. 
 
-Let , and , it is easy to check that LHS is greater than zero, while RHS is not. Similarly, assuming  can disprove the same. 
+Let $ t_{p_1}, t_{p_2}, t_{p_3}, ...  t_{p_N} $ be the timestamps corresponding to the S1 peaks of the reference signal. We select peaks with co-ordinates $ (t_{p_2}, p_2), ..., (t_{p_{N-1}}, p_{N-1}) $.
 
+```
+    Input: Window length w, sampling frequency f_s.
+    Output: C of dimension.
+    Local: Length of signal l_s, hop-length h, number of frames N_w, filter length l_f, n_s is the length per segment.
 
+    N_w ⟵Round(l_s/ h)
+    s ⟵ PadZeros(s, (w/2, w/2))
+    [t_pn] ⟵ ComputeReferenceFrame(r, w, h, l_f)
+    C ⟵ Zeros((Round(N_w+1), n_s/2+1))
+    for t_pn ∈ {t_p1,  ..., t_pN} 
+        C' ⟵ Zeros((N_w+1), n_s/2+1)
+        for t ∈ {t_pn - n, ..., t_pn + n}
+           C_t ⟵ []
+           for N ∈ {0, (N_w+1))
+           r' ⟵ r[t*h-(w/2): t*h+(w/2)]
+           s' ⟵ s[N*h: N*h+w]
+           f, C_rs ⟵ Coherence(r', s', N_fft, n_s)
+           C_xy ⟵ GaussianFilter1d(C_xy, sigma)
+           C'_t ⟵ C_rs
+           C'_t ⟵ Threshold(C_t', p)
+           C' ⟵ C' + C'_t
+        C \leftarrow C + Normalize(C')
+     Return C 
+```
+*Algorithm for signal scoring*
 
+![Image](/assets/coherence-plot.svg){:style="display:block; margin-left:auto; margin-right:auto"}
+*Top: Test signal `s` and score `C`; Bottom: Cross coherence plot `C_rs`.*
 
+![Image](/assets/Envelope_comparisions.svg){:style="display:block; margin-left:auto; margin-right:auto"}
+*Comparison of the cross-coherence feature against traditional envelope features for a normal PCG recording.*
 
+![Image](/assets/Envelope_comparisions_408.svg){:style="display:block; margin-left:auto; margin-right:auto"}
+*Comparison of the cross-coherence feature against traditional envelope features for a PCG with inconsistent sound amplitudes.*
