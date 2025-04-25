@@ -17,13 +17,14 @@ Here, I present an envelope extraction method for periodic signals in the presen
 Let $ r(t) $ be a clean reference signal of time period $ T $. For example, consider the heart sound signal in Figure 1. The PCG signal is an approximately periodic signal, with each period consisting of at least two distinct sounds, namely the S1 and S2, the systolic and diastolic movements of the heart respectively.
 The test signal $s(t)$ of any duration has characteristics similar to $ r(t) $ but noisy. We consider a window length $ w $ and hop-length $ h $.
 The window length is approximately one time period of the reference signal. The reference signal has a uniform period and consistently maintains the S1/S2 amplitudes. When the signals are windowed, the complex-coherency of the windowed signals $ r'(t) $ and $ s'(t) $,
-Let $ t_{p_1}, t_{p_2}, t_{p_3}, ...  t_{p_N} $ be the timestamps corresponding to the S1 peaks of the reference signal. We select peaks with co-ordinates $ (t_{p_2}, p_2), ..., (t_{p_{N-1}}, p_{N-1}) $.
 
 \begin{equation}
 C_{r's'} = \frac{\phi_{r's'}}{\sqrt{\phi_{r'r'}\phi_{s's'}}}
 \end{equation}
 
-where  $ \phi_{r's'} $ is the cross-spectrum of the signals, $ \phi_{r'r'} $ and $ \phi_{s's'} $ are the respective power spectral densities (PSDs). The Welch algorithm estimates the PSD. 
+where  $ \phi_{r's'} $ is the cross-spectrum of the signals, $ \phi_{r'r'} $ and $ \phi_{s's'} $ are the respective power spectral densities (PSDs). I have used the Welch algorithm to estimate the PSD. 
+
+Let $ t_{p_1}, t_{p_2}, t_{p_3}, ...  t_{p_N} $ be the timestamps corresponding to the S1 peaks of the reference signal. We select peaks with co-ordinates $ (t_{p_2}, p_2), ..., (t_{p_{N-1}}, p_{N-1}) $.
 
 ```
     Input: Window length w, sampling frequency f_s.
