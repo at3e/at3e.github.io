@@ -83,11 +83,12 @@ b =
 \end{cases}
 \end{equation}
 
-Here, we use what is called the big-M constraint.
-Let 
+Here, we use what is called the big-M constraint. Let $M$ be a large number. Then,
+\begin{equation}
+x - y \geq -M \cdot (1 - b)
+\end{equation}
 
-
-To prove the same by proof by contradiction,
+This can be proved by contradiction.
 
 Let , and , it is easy to check that LHS is greater than zero, while RHS is not. Similarly, assuming  can disprove the same. 
 
