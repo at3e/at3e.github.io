@@ -11,7 +11,7 @@ Heart sound signals, particularly the first (S1) and second (S2) heart sounds, h
 
 Here, I present an envelope extraction method for periodic signals in the presence of ambient noise and overlapping signal and noise characteristics. The design of such a filter without prior knowledge of the noise characteristics can be challenging. Given a clean template signal, cross-coherence can be used to score the signal purity against time.
 
-![Image](/assets/st.svg){: style="float: center" width="50%"}
+![Image](/assets/st.svg){:style="display:block; margin-left:auto; margin-right:auto; width:50%"}
 *Clean PCG signal*
 
 Let $ r(t) $ be a clean reference signal of time period $ T $. For example, consider the heart sound signal. The heart sound signal is an approximately periodic signal, with each period consisting of at least two distinct sounds, namely the S1 and S2, consisting of systolic and diastolic movements of the heart.
