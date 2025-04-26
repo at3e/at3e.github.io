@@ -71,7 +71,7 @@ z >= x - U⋅(1 - y)
 ```
 The last equation is an example of the if-else construct, explained next.
 
-**If-else**
+**Conditional branching**
 
 Gurobi’s Python API does not provide an inbuilt if-else construct. But the if-else constraint can be decomposed into linear constraints using auxiliary variables. Let us take up a simple case:
 
@@ -86,10 +86,12 @@ b =
 $$
 Here, we use what is called the big-M constraint. Let $M$ be a large number. Then,
 \begin{equation}
-x - y \geq \eps -M \cdot (1 - b)
+x - y \geq \epsilon -M \cdot (1 - b)\\
+x - y \leq M \cdot b
 \end{equation}
 
-This can be easily proved by contradiction. Assume $b=1$, and  $x>y$, the LHS remains greater than or equal to zero, while RHS is not. Similarly, assuming $b=0$ can disprove the same. 
+This can be easily proved by contradiction. Assume $b=1$, and  $x>y$, the LHS remains greater than or equal to zero, while RHS is not. This example is borrowed from source:[here](https://support.gurobi.com/hc/en-us/articles/4414392016529-How-do-I-model-conditional-statements-in-Gurobi), but the idea can be extended to other complex cases,
+
 
 
 
