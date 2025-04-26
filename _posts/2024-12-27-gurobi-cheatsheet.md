@@ -101,7 +101,11 @@ This can be easily proved by contradiction. Assume $b=1$, and  $x>y$, the LHS re
 Consider the following set conditions,
 $$
 \begin{equation}
-y = \begin{cases} a_1, & \text{if } x \geq c_2 \\ a_2, & \text{if } c_1 \leq x < c_2 \\ a_3, & \text{if } x < c_1 \end{cases}
+y = 
+\begin{cases} a_1, & \text{if } x \geq c_2 \\ 
+a_2, & \text{if } c_1 \leq x < c_2 \\ 
+a_3, & \text{if } x < c_1 
+\end{cases}
 \end{equation}
 $$
 Here, we need three variables ,  for each constraint in the above equation. 
