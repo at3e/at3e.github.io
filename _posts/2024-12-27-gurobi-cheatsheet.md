@@ -107,7 +107,22 @@ a_3, & \text{if } x < c_1
 \end{cases}
 \end{equation}
 $$
-Here, we need three binary indicator variables, $z_1$, $z_2$, and $z_3$ for each of the constraints in the above equation. 
+Here, we need three binary indicator variables, $z_1$, $z_2$, and $z_3$ for the big-M formulation.
+
+*2. Nested Conditional Branching*
+
+Consider the following set of conditions,
+
+$$
+\begin{equation}
+y = 
+\begin{cases} x + 10, & \text{if } x \geq 7 \\ 
+x + 5, & \text{if } 4 \leq x < 7 \\ 
+x, & \text{if } x < 4 
+\end{cases}
+\end{equation}
+$$
+ 
 
 
 
