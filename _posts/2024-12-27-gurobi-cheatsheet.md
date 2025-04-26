@@ -107,7 +107,7 @@ a_3, & \text{if } x < c_1
 \end{cases}
 \end{equation}
 $$
-Here, we need three variables ,  for each constraint in the above equation. 
+Here, we need three binary indicator variables, $z_1$, $z_2$, and $z_3$ for each of the constraints in the above equation. 
 
 
 
