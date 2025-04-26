@@ -79,14 +79,14 @@ $$
 \begin{equation}
 b =
 \begin{cases} 
-1, & \text{if } x < y\\
+1, & \text{if } x > y\\
 0, & \text{otherwise}
 \end{cases}
 \end{equation}
 $$
 Here, we use what is called the big-M constraint. Let $M$ be a large number. Then,
 \begin{equation}
-x - y \geq -M \cdot (1 - b)
+x - y \geq \eps -M \cdot (1 - b)
 \end{equation}
 
 This can be easily proved by contradiction. Assume $b=1$, and  $x>y$, the LHS remains greater than or equal to zero, while RHS is not. Similarly, assuming $b=0$ can disprove the same. 
