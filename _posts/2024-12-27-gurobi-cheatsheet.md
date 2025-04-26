@@ -89,9 +89,7 @@ Here, we use what is called the big-M constraint. Let $M$ be a large number. The
 x - y \geq -M \cdot (1 - b)
 \end{equation}
 
-This can be proved by contradiction.
-
-Let , and , it is easy to check that LHS is greater than zero, while RHS is not. Similarly, assuming  can disprove the same. 
+This can be easily proved by contradiction. Assume $b=1$, and  $x>y$, the LHS remains greater than or equal to zero, while RHS is not. Similarly, assuming $b=0$ can disprove the same. 
 
 
 
