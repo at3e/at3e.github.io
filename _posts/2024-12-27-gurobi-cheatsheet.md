@@ -85,9 +85,10 @@ b =
 \end{equation}
 $$
 Here, we use what is called the big-M constraint. Let $M$ be a large number. Then,
-\begin{equation*}
+\begin{*equation}
 x - y \geq \epsilon -M \cdot (1 - b)\\
-\end{equation*}
+\end{*equation}
+
 \begin{equation}
 x - y \leq M \cdot b
 \end{equation}
