@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: post
 use_math: true
 title: The Gurobi Cheatsheet for Integer Non-linear Programming Formulation 
 ---
@@ -13,7 +13,7 @@ We get started with the AND construct. This is for engineers who are stuck with 
 
 We begin with the truth table of binary AND, and the plot of the same.
 
-```
+```math
 z = x⋅y
 ```
 
@@ -85,12 +85,21 @@ b =
 \end{equation}
 $$
 Here, we use what is called the big-M constraint. Let $M$ be a large number. Then,
+\begin{equation*}
+x - y \geq \epsilon -M \cdot (1 - b)\\
+\end{equation*}
 \begin{equation}
-x - y \geq \epsilon -M \cdot (1 - b)\\\\
 x - y \leq M \cdot b
 \end{equation}
 
 This can be easily proved by contradiction. Assume $b=1$, and  $x>y$, the LHS remains greater than or equal to zero, while RHS is not. This example is borrowed from [here](https://support.gurobi.com/hc/en-us/articles/4414392016529-How-do-I-model-conditional-statements-in-Gurobi), but the idea can be extended to other complex cases,
+
+*Multi-Conditional Branching*
+Consider 
+Here, we need three variables ,  for each constraint in the above equation. 
+
+
+
 
 
 
