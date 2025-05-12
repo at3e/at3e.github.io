@@ -86,7 +86,7 @@ b =
 $$
 Here, we use what is called the big-M constraint. Let $M$ be a large number. Then,
 \begin{equation}
-x - y \geq \epsilon -M \cdot (1 - b)\\
+x - y \geq \epsilon -M \cdot (1 - b)
 \end{equation}
 
 \begin{equation}
@@ -108,21 +108,9 @@ a_3, & \text{if } x < c_1
 \end{equation}
 $$
 Here, we need three binary indicator variables, $z_1$, $z_2$, and $z_3$ for the big-M formulation.
-
-*2. Nested Conditional Branching*
-
-Consider the following set of conditions,
-
-$$
 \begin{equation}
-y = 
-\begin{cases} x + 10, & \text{if } x \geq 7 \\ 
-x + 5, & \text{if } 4 \leq x < 7 \\ 
-x, & \text{if } x < 4 
-\end{cases}
+z_1 + z_2 + z_3 = 1
 \end{equation}
-$$
- 
 
 
 
