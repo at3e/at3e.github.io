@@ -101,9 +101,9 @@ Consider the following set conditions,
 $$
 \begin{equation}
 y = 
-\begin{cases} a_1, & \text{if } x \geq c_2 \\ 
+\begin{cases} a_1, & \text{if } x < c_1 \\ 
 a_2, & \text{if } c_1 \leq x < c_2 \\ 
-a_3, & \text{if } x < c_1 
+a_3, & \text{if } x \geq c_2 
 \end{cases}
 \end{equation}
 $$
@@ -112,6 +112,10 @@ Here, we need three binary indicator variables, $z_1$, $z_2$, and $z_3$ for the 
 z_1 + z_2 + z_3 = 1
 \end{equation}
 
+The big-M constraints are,
+\begin{equation}
+x \leq c_1 - M (1 - z_1) \\
+\end{equation}
 
 
 
