@@ -120,11 +120,15 @@ x \leq c_1 - M (1 - z_1) \\
 
 *2. Multi-Conditional Branching With Range Overlap*
 
+$$
 \begin{equation}
-y = \begin{cases} 2x, & \text{if } x \geq 7 \\ 
+y = 
+\begin{cases} 2x, & \text{if } x \geq 7 \\ 
 x + 5, & \text{if } x \in [4, 8] \\ 
-x, & \text{if } x < 4 \end{cases}
+x, & \text{if } x < 4 
+\end{cases}
 \end{equation}
+$$
 
 
 
