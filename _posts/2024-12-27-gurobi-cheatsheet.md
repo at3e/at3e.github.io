@@ -61,6 +61,24 @@ The corresponding visualization is,
 
 *Figure 3: The final solution space.*
 
+The Python code for the same is,
+```
+import gurobipy as gp
+from gurobipy import GRB
+
+# Create a model
+m = gp.Model("and_logic")
+
+# Add binary variables
+x = m.addVar(vtype=GRB.BINARY, name="x")
+y = m.addVar(vtype=GRB.BINARY, name="y")
+z = m.addVar(vtype=GRB.BINARY, name="z")
+
+# Add constraints to model z = x AND y
+m.addConstr(z <= x)
+m.addConstr(z <= y)
+m.addConstr(z >= x + y - 1)
+```
 
 The idea is extended for multiplication between a binary variable and an integer/continuous variable. Let `x` be a continuous/integer variable with a known upper bound `U`, and `y` be a binary variable. `z` is their product.
 These are the constraints that work,
