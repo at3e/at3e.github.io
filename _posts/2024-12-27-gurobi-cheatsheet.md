@@ -84,11 +84,11 @@ The idea is extended for multiplication between a binary variable and an integer
 These are the constraints that work,
 
 \begin{equation}
-$$
+$
 z \leq U \cdot y \\
 z \leq x \\
 z \geq x - U\cdot(1 - y)
-$$
+$
 \end{equation}
 
 The last equation is an example of the if-else construct, explained next.
