@@ -129,8 +129,8 @@ import gurobipy as gp
 from gurobipy import GRB
 
 # Constants
-M = 1e5       # A sufficiently large number
-epsilon = 1e-4  # A small positive number
+M = 1e5
+epsilon = 1e-4
 
 # Create model
 model = gp.Model("conditional_branching")
@@ -166,8 +166,21 @@ z_1 + z_2 + z_3 = 1
 \end{equation}
 
 The big-M constraints are,
+
 \begin{equation}
-x \leq c_1 - M (1 - z_1) \\
+x \leq c_1 - \epsilon + M \cdot (1 - z_1)
+\end{equation}
+
+\begin{equation}
+x \leq c_1 - \epsilon + M \cdot (1 - z_1)
+\end{equation}
+
+\begin{equation}
+x \leq c_1 - \epsilon + M \cdot (1 - z_1)
+\end{equation}
+
+\begin{equation}
+x \leq c_1 - \epsilon + M \cdot (1 - z_1)
 \end{equation}
 
 The python code is,
@@ -185,20 +198,20 @@ c1, c2 = 5, 15
 model = gp.Model("piecewise_with_z")
 
 # Variables
-x = model.addVar(lb=-GRB.INFINITY, name="x")
-y = model.addVar(lb=-GRB.INFINITY, name="y")
+x = model.addVar(vtype=GRB.INTEGER, name="x")
+y = model.addVar(vtype=GRB.INTEGER, name="y")
 z1 = model.addVar(vtype=GRB.BINARY, name="z1")
 z2 = model.addVar(vtype=GRB.BINARY, name="z2")
 z3 = model.addVar(vtype=GRB.BINARY, name="z3")
 
-# One-hot encoding: exactly one condition holds
+# Exactly one condition holds
 model.addConstr(z1 + z2 + z3 == 1, name="one_hot_z")
 
 # Region constraints
-model.addConstr(x <= c1 - epsilon + M * (1 - z1), name="z1_active => x < c1")
-model.addConstr(x >= c1 - M * (1 - z2), name="z2_active => x >= c1")
-model.addConstr(x <= c2 - epsilon + M * (1 - z2), name="z2_active => x < c2")
-model.addConstr(x >= c2 - M * (1 - z3), name="z3_active => x >= c2")
+model.addConstr(x <= c1 - epsilon + M * (1 - z1))
+model.addConstr(x >= c1 - M * (1 - z2))
+model.addConstr(x <= c2 - epsilon + M * (1 - z2))
+model.addConstr(x >= c2 - M * (1 - z3))
 
 # Output assignment
 model.addConstr(y == a1 * z1 + a2 * z2 + a3 * z3, name="y_by_z")
