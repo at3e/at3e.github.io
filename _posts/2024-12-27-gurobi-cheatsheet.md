@@ -136,8 +136,8 @@ epsilon = 1e-4  # A small positive number
 model = gp.Model("conditional_branching")
 
 # Variables
-x = model.addVar(lb=-GRB.INFINITY, name="x")
-y = model.addVar(lb=-GRB.INFINITY, name="y")
+x = model.addVar(vtype=GRB.INTEGER, name="x")
+y = model.addVar(vtype=GRB.INTEGER, name="y")
 b = model.addVar(vtype=GRB.BINARY, name="b")  # binary indicator variable
 
 # Constraints implementing: b = 1 if x > y; 0 otherwise
