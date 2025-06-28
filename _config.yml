@@ -58,7 +58,7 @@ minima:
 
 markdown: kramdown
 kramdown:
-  math_engine: katex
+  math_engine: mathjax
   syntax_highlighter: rouge
   syntax_highlighter_opts:
     block:
