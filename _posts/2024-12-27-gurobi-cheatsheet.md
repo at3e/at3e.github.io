@@ -167,12 +167,18 @@ z_1 + z_2 + z_3 = 1
 
 The big-M constraints are,
 
+i. If $z_1 = 1$, then $x < c_1$. Otherwise, the constraint becomes non-restrictive and the large value of $M$ reduces it to a trivial bound.
+
 \begin{equation}
 x \leq c_1 - \epsilon + M \cdot (1 - z_1)
 \end{equation}
 
 \begin{equation}
-x \leq c_1 - \epsilon + M \cdot (1 - z_1)
+x \geq c_1 - M \cdot (1 - z_2)
+\end{equation}
+
+\begin{equation}
+x \geq c_2 - M \cdot (1 - z_3)
 \end{equation}
 
 \begin{equation}
