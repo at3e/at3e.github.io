@@ -88,7 +88,10 @@ z \leq U \cdot y
 \end{equation}
 
 \begin{equation}
-z \leq x\\
+z \leq x
+\end{equation}
+
+\begin{equation}
 z \geq x - U\cdot(1 - y)
 \end{equation}
 
