@@ -182,10 +182,13 @@ x \geq c_1 - M \cdot (1 - z_2)
 x \geq c_2 - M \cdot (1 - z_3)
 \end{equation}
 
+iii. the second condition, when $z_1 = 0, z_2 = 1$, and $z_3 = 0$, gets split into $x \geq c_1$ and $x < c_2$. The constraint for the first part is already defined above. The other constraint,
 
 \begin{equation}
-x \leq c_1 - \epsilon + M \cdot (1 - z_1)
+x \leq c_2 - M \cdot (1 - z_2)
 \end{equation}
+
+and 
 
 \begin{equation}
 x \leq c_1 - \epsilon + M \cdot (1 - z_1)
@@ -218,7 +221,7 @@ model.addConstr(z1 + z2 + z3 == 1, name="one_hot_z")
 # Region constraints
 model.addConstr(x <= c1 - epsilon + M * (1 - z1))
 model.addConstr(x >= c1 - M * (1 - z2))
-model.addConstr(x <= c2 - epsilon + M * (1 - z2))
+model.addConstr(x <= c2 + M * (1 - z2))
 model.addConstr(x >= c2 - M * (1 - z3))
 
 # Output assignment
