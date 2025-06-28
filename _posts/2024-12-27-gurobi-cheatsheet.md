@@ -105,6 +105,7 @@ b =
 \end{equation}
 $$
 Here, we use what is called the big-M constraint. Let $M$ be a large number. Then,
+
 \begin{equation}
 x - y \geq \epsilon -M \cdot (1 - b)
 \end{equation}
@@ -118,6 +119,7 @@ This can be easily proved by contradiction. Assume $b=1$, and  $x>y$, the LHS re
 *1. Multi-Conditional Branching*
 
 Consider the following set conditions,
+
 $$
 \begin{equation}
 y = 
@@ -127,7 +129,9 @@ a_3, & \text{if } x \geq c_2
 \end{cases}
 \end{equation}
 $$
+
 Here, we need three binary indicator variables, $z_1$, $z_2$, and $z_3$ for the big-M formulation.
+
 \begin{equation}
 z_1 + z_2 + z_3 = 1
 \end{equation}
