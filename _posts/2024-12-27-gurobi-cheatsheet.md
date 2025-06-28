@@ -173,6 +173,7 @@ i. If $z_1 = 1$, then $x < c_1$. Otherwise, the constraint becomes non-restricti
 x \leq c_1 - \epsilon + M \cdot (1 - z_1)
 \end{equation}
 
+ii. When $z_1 = 1, z_2 = 0$, and $z_3 = 0$, the follwing constraints become trivial. 
 \begin{equation}
 x \geq c_1 - M \cdot (1 - z_2)
 \end{equation}
@@ -180,6 +181,7 @@ x \geq c_1 - M \cdot (1 - z_2)
 \begin{equation}
 x \geq c_2 - M \cdot (1 - z_3)
 \end{equation}
+
 
 \begin{equation}
 x \leq c_1 - \epsilon + M \cdot (1 - z_1)
