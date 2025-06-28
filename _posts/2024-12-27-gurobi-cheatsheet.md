@@ -185,7 +185,7 @@ Note that when $z_1 = 1, z_2 = 0$, the above condition becomes trivial. The addi
 x \leq c_2 - \epsilon + M \cdot (1 - z_2)
 \end{equation}
 
-iii. The last case is $x > c_2$. The following constraints satisfy $z_1 = 0, z_2 = 0$, and $z_3 = 1$
+iii. The last case is $x \geq c_2$. The following constraint satisfies this case when $z_1 = 0, z_2 = 0$, and $z_3 = 1$
 
 \begin{equation}
 x \geq c_2 - M \cdot (1 - z_3)
