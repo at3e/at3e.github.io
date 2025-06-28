@@ -213,7 +213,7 @@ z2 = model.addVar(vtype=GRB.BINARY, name="z2")
 z3 = model.addVar(vtype=GRB.BINARY, name="z3")
 
 # Exactly one condition holds
-model.addConstr(z1 + z2 + z3 == 1, name="one_hot_z")
+model.addConstr(z1 + z2 + z3 == 1, name="exclusivity")
 
 # Region constraints
 model.addConstr(x <= c1 - epsilon + M * (1 - z1))
@@ -222,7 +222,7 @@ model.addConstr(x <= c2 + M * (1 - z2))
 model.addConstr(x >= c2 - M * (1 - z3))
 
 # Output assignment
-model.addConstr(y == a1 * z1 + a2 * z2 + a3 * z3, name="y_by_z")
+model.addConstr(y == a1 * z1 + a2 * z2 + a3 * z3, name="output")
 ```
 
 *2. Multi-Conditional Branching With Range Overlap*
