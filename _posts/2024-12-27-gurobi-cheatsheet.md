@@ -122,7 +122,28 @@ x - y \geq \epsilon -M \cdot (1 - b)
 x - y \leq M \cdot b
 \end{equation}
 
-This can be easily proved by contradiction. Assume $b=1$, and  $x>y$, the LHS remains greater than or equal to zero, while RHS is not. This example is borrowed from [here](https://support.gurobi.com/hc/en-us/articles/4414392016529-How-do-I-model-conditional-statements-in-Gurobi), but the idea can be extended to other complex cases.
+This can be easily proved by contradiction. Assume $b=1$, and  $x>y$, the LHS remains greater than or equal to zero, while RHS is not. This example is borrowed from [here](https://support.gurobi.com/hc/en-us/articles/4414392016529-How-do-I-model-conditional-statements-in-Gurobi), but the idea can be extended to other complex cases. The python code is 
+
+```
+mport gurobipy as gp
+from gurobipy import GRB
+
+# Constants
+M = 1e5       # A sufficiently large number
+epsilon = 1e-4  # A small positive number
+
+# Create model
+model = gp.Model("if_else_logic")
+
+# Variables
+x = model.addVar(lb=-GRB.INFINITY, name="x")
+y = model.addVar(lb=-GRB.INFINITY, name="y")
+b = model.addVar(vtype=GRB.BINARY, name="b")  # binary indicator variable
+
+# Constraints implementing: b = 1 if x > y; 0 otherwise
+model.addConstr(x - y >= epsilon - M * (1 - b), name="if_branch")
+model.addConstr(x - y <= M * b, name="else_branch")
+```
 
 *1. Multi-Conditional Branching*
 
