@@ -173,25 +173,22 @@ i. If $z_1 = 1$, then $x < c_1$. Otherwise, the constraint becomes non-restricti
 x \leq c_1 - \epsilon + M \cdot (1 - z_1)
 \end{equation}
 
-ii. When $z_1 = 1, z_2 = 0$, and $z_3 = 0$, the follwing constraints become trivial. 
+ii. the second case, where $z_1 = 0, z_2 = 1$, and $z_3 = 0$, the condition splits into two parts: $x \geq c_1$ and $x < c_2$. The constraint for the first part is,
+
 \begin{equation}
 x \geq c_1 - M \cdot (1 - z_2)
 \end{equation}
 
-\begin{equation}
-x \geq c_2 - M \cdot (1 - z_3)
-\end{equation}
-
-iii. the second case, where $z_1 = 0, z_2 = 1$, and $z_3 = 0$, the condition splits into two parts: $x \geq c_1$ and $x < c_2$. The constraint for the first part is already defined above. The additional constraint for enforcing $x < c_2$,
+Note that when $z_1 = 1, z_2 = 0$, the above condition becomes trivial. The additional constraint for enforcing $x < c_2$,
 
 \begin{equation}
 x \leq c_2 - \epsilon + M \cdot (1 - z_2)
 \end{equation}
 
-and 
+iii. The last case is $x > c_2$. The following constraints satisfy $z_1 = 0, z_2 = 0$, and $z_3 = 1$
 
 \begin{equation}
-x \leq c_1 - \epsilon + M \cdot (1 - z_1)
+x \geq c_2 - M \cdot (1 - z_3)
 \end{equation}
 
 The python code is,
