@@ -83,11 +83,13 @@ m.addConstr(z >= x + y - 1)
 The idea is extended for multiplication between a binary variable and an integer/continuous variable. Let $x$ be a continuous/integer variable with a known upper bound $U$, and $y$ be a binary variable. $z$ is their product.
 These are the constraints that work,
 
-$$\begin{equation}
+$$
+\begin{equation}
 z \leq U \cdot y \\
 z \leq x \\
 z \geq x - U\cdot(1 - y)
-\end{equation}$$
+\end{equation}
+$$
 
 The last equation is an example of the if-else construct, explained next.
 
@@ -104,6 +106,7 @@ b =
 \end{cases}
 \end{equation}
 $$
+
 Here, we use what is called the big-M constraint. Let $M$ be a large number. Then,
 
 \begin{equation}
