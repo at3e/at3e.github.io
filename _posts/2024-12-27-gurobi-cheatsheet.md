@@ -191,7 +191,7 @@ iii. The last case is $x \geq c_2$. The following constraint satisfies this case
 x \geq c_2 - M \cdot (1 - z_3)
 \end{equation}
 
-The python code is,
+The python code is given below. We assume arbitrary values for $a_i, i=1,2,3$ and $c_1, c_2$.
 ```
 import gurobipy as gp
 from gurobipy import GRB
@@ -203,7 +203,7 @@ a1, a2, a3 = 10, 20, 30
 c1, c2 = 5, 15
 
 # Create model
-model = gp.Model("piecewise_with_z")
+model = gp.Model("multiconditinal_branching")
 
 # Variables
 x = model.addVar(vtype=GRB.INTEGER, name="x")
