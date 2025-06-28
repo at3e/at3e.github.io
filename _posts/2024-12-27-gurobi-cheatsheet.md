@@ -85,8 +85,8 @@ These are the constraints that work,
 
 $$
 \begin{equation}
-z \leq U \cdot y \\
-z \leq x \\
+z \leq U \cdot y\\
+z \leq x\\
 z \geq x - U\cdot(1 - y)
 \end{equation}
 $$
