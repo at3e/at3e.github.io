@@ -80,17 +80,15 @@ for edge in G_B.edges():
        Rnode0_score = G_R.nodes[Rnode0]['score']
        
     node1 = edge[1]
-    
-    Rnode1 = random.choice(G_B.nodes[node1]['Rnodes'])
-    G_R.add_edge(Rnode0, Rnode1)
     # Check if a red node at target can be used
     flag1 = bool(list(n for n in G_B.nodes[node1]['Rnodes'] if G_R.nodes[n]['score'] < max_length - Rnode0_score))
     if flag1:
        # Randomly select a red node
        Rnode1 = random.choice(list(n for n in G_B.nodes[node1]['Rnodes'] if G_R.nodes[n]['score'] < max_length - Rnode0_score))
-    # Update graph
-    G_R.nodes[Rnode1]['score'] = max(logicG.nodes[Rnode1]['score'], logicG.nodes[Rnode0]['score'] + 1)
-    updateNodescores(G_R, Rnode1)
+       G_R.add_edge(Rnode0, Rnode1)
+       # Update graph
+       G_R.nodes[Rnode1]['score'] = max(logicG.nodes[Rnode1]['score'], logicG.nodes[Rnode0]['score'] + 1)
+       updateNodescores(G_R, Rnode1)
 
 ```
 
@@ -140,6 +138,7 @@ This method can be computationally intensive for large graphs. Do let me know if
   <source src="https://github.com/at3e/at3e.github.io/tree/main/assets/Graph/27197181_MotionElements_awkward-dumbfounded-hd.mp4" type="video/mp4">
   <p>Your browser does not support the video element.</p>
 </video>
+
 
 
 
