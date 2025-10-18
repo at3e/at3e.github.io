@@ -63,7 +63,7 @@ max_length = 5
 
 for edge in G_B.edges():
     node0 = edge[0]
-    # Check if a red node is available 
+    # Check if a red node can be used
     flag = bool(list(n for n in G_B.nodes[node0]['Rnodes'] if G_R.nodes[n]['score'] < max_length))
     if flag:
        # Select a red node randomly
@@ -132,3 +132,4 @@ This method can be computationally intensive for large graphs. Do let me know if
   <source src="https://github.com/at3e/at3e.github.io/tree/main/assets/Graph/27197181_MotionElements_awkward-dumbfounded-hd.mp4" type="video/mp4">
   <p>Your browser does not support the video element.</p>
 </video>
+
