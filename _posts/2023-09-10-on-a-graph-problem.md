@@ -102,8 +102,8 @@ def checkNodescores(G, node, max_score):
         flag = False
         return flag
     while q:
-        u = q.pop(0)
-        vnodes_in = list(G.successors(u))
+        v = q.pop(0)
+        vnodes_in = list(G.successors(v))
         if not vnodes_in:
             continue
         else:
@@ -139,6 +139,7 @@ This method can be computationally intensive for large graphs. Partitioning the 
   <source src="https://github.com/at3e/at3e.github.io/tree/main/assets/Graph/27197181_MotionElements_awkward-dumbfounded-hd.mp4" type="video/mp4">
   <p>Your browser does not support the video element.</p>
 </video>
+
 
 
 
