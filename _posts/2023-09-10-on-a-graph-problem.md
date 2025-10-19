@@ -103,16 +103,16 @@ def checkNodescores(G, node, max_score):
         return flag
     while q:
         v = q.pop(0)
-        vnodes_in = list(G.successors(v))
-        if not vnodes_in:
+        v_s = list(G.successors(v))
+        if not v_s:
             continue
         else:
-            for vnode in vnodes_in:
-                if vnode not in visited and G.nodes[vnode]['s'] >= max_score:
+            for v_ in v_s:
+                if v_ not in visited and G.nodes[v_]['s'] >= max_score:
                     flag = False
                     return flag
-                q.append(vnode)
-                visited.append(vnode)
+                q.append(v_)
+                visited.append(v_)
     return flag
 
 def updateNodescores(G, node):
@@ -139,6 +139,7 @@ This method can be computationally intensive for large graphs. Partitioning the 
   <source src="https://github.com/at3e/at3e.github.io/tree/main/assets/Graph/27197181_MotionElements_awkward-dumbfounded-hd.mp4" type="video/mp4">
   <p>Your browser does not support the video element.</p>
 </video>
+
 
 
 
