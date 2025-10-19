@@ -64,7 +64,7 @@ max_length = 5
 for edge in G_B.edges():
     node0 = edge[0]
     # Check if a red node at source can be used
-    flag0 = bool(list(n for n in G_B.nodes[node0]['Rnodes'] if G_R.nodes[n]['score'] < max_length))
+    flag0 = bool(list(n for n in G_B.nodes[node0]['Rnodes'] if checkNodescores(G_R, n, max_length))
     if flag0:
        # Randomly select a red node
        Rnode0 = random.choice(list(n for n in G_B.nodes[node0]['Rnodes'] if G_R.nodes[n]['score'] < max_length))
@@ -84,15 +84,15 @@ for edge in G_B.edges():
     flag1 = bool(list(n for n in G_B.nodes[node1]['Rnodes'] if G_R.nodes[n]['score'] < max_length - Rnode0_score))
     if flag1:
        # Randomly select a red node
-       Rnode1 = random.choice(list(n for n in G_B.nodes[node1]['Rnodes'] if G_R.nodes[n]['score'] < max_length - Rnode0_score))
+       Rnode1 = random.choice(list(n for n in G_B.nodes[node1]['Rnodes'] if checkNodescores(G_R, n, max_length - Rnode0_score)))
        G_R.add_edge(Rnode0, Rnode1)
        # Update graph
        G_R.nodes[Rnode1]['score'] = max(logicG.nodes[Rnode1]['score'], logicG.nodes[Rnode0]['score'] + 1)
        updateNodescores(G_R, Rnode1)
 
 ```
-
-The updateNodescores method is a BFS algorithm based routine that updates the node scores of all successors.
+The `checkNodescores` method declared above makes sure that the scores of all successor nodes remain below `max_length`.
+The `updateNodescores` method is a BFS algorithm based routine that updates the node scores of all successors.
 ```
 def checkNodescores(G, node, max_score):
     flag=True
@@ -132,12 +132,14 @@ def updateNodescores(G, node):
                 visited.append(vnode)
     return
 ```
-This method can be computationally intensive for large graphs. Do let me know if you have suggestions!
+This method can be computationally intensive for large graphs. Partitioning the graph can help, but will also require ssome clever post-processing tricks. Do let me know if you have suggestions!
+
 <img src="{{site.baseurl | prepend: site.url}}assets/Graph/27197181_MotionElements_awkward-dumbfounded-hd.gif"  width="64" height="32" alt="zigzag" />
 <video autoplay muted loop>
   <source src="https://github.com/at3e/at3e.github.io/tree/main/assets/Graph/27197181_MotionElements_awkward-dumbfounded-hd.mp4" type="video/mp4">
   <p>Your browser does not support the video element.</p>
 </video>
+
 
 
 
