@@ -18,7 +18,7 @@ The MCTS is a search algorithm that incorporates randomised search to a tree str
 Let's first build the MCTS class and construct a wrapper for the reviewer to ingest.
 
 **1. The Node**
-The node is the building block of the MCTS search tree. It stores the state and all related data, such as pointer to the parent node, the action taken from the parent to reach the current node, the childern nodes, the value etc.
+The node is the building block of the MCTS search tree. It stores the state and all related data, such as pointer to the parent node, the action taken from the parent to reach the current node, the childern nodes, the value etc. The `is_expanded` Checks whether the node has been fully expanded.
 ```
 import math
 import random
