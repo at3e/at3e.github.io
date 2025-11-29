@@ -17,6 +17,8 @@ The MCTS is a search algorithm that incorporates randomised search to a tree str
 
 Let's first build the MCTS class and construct a wrapper for the reviewer to ingest.
 
+**1. The Node**
+The node is the building block of the MCTS search tree. It stores the state and all related data, such as pointer to the parent node, the action taken from the parent to reach the current node, the childern nodes, the value etc.
 ```
 import math
 import random
@@ -25,18 +27,33 @@ import random
 class Node:
 	def __init__(self, state, parent=None, move=None):
 		self.state = state
-		self.parent = parent
-		self.action = action
-		self.children = []
-		self.max_children = 5
-		self.visits = 0
-		
+        self.parent = parent
+        self.action = move  # action taken from parent to reach this node
+        self.children = []
+        self.max_children = 5
+        self.visits = 0
+        self.value_sum = 0.0  # cumulative reward
 
-	def is_expanded(self):
-		return len(self.children) == 5
+    def is_expanded(self):
+        return len(self.children) >= self.max_children
 
-	def best_child(self, c_param=1.4):
-		#Calculate the UCB
+    def value(self):
+        # average value
+        return self.value_sum / self.visits if self.visits > 0 else 0.0
 
-		return self.children[argmax]
+    def best_child(self, c_param=1.4):
+        """Select child with highest UCB score."""
+        scores = []
+        for child in self.children:
+            if child.visits == 0:
+                score = float("inf")  # force exploration
+            else:
+                exploit = child.value()
+                explore = c_param * math.sqrt(math.log(self.visits) / child.visits)
+                score = exploit + explore
+            scores.append(score)
+
+        # argmax
+        best_index = max(range(len(scores)), key=lambda i: scores[i])
+        return self.children[best_index]
 ```
