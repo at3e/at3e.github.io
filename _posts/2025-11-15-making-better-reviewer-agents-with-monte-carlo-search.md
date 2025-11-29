@@ -13,3 +13,30 @@ First, I build a local version of this multi-agent code review engine. Please re
 
 **Monte Carlo Tree Search**
 The MCTS is a search algorithm that incorporates randomised search to a tree structure and used in decision making.
+
+
+Let's first build the MCTS class and construct a wrapper for the reviewer to ingest.
+
+```
+import math
+import random
+
+
+class Node:
+	def __init__(self, state, parent=None, move=None):
+		self.state = state
+		self.parent = parent
+		self.action = action
+		self.children = []
+		self.max_children = 5
+		self.visits = 0
+		
+
+	def is_expanded(self):
+		return len(self.children) == 5
+
+	def best_child(self, c_param=1.4):
+		#Calculate the UCB
+
+		return self.children[argmax]
+```
