@@ -70,9 +70,9 @@ This is where the agent decides where to go next in its current knowledge map (t
 
 $$UCB = Q + c \cdot \sqrt{\frac{\ln(N)}{n}}$$
 
-**2. Expansion: Adding New Knowledge**
-Once the algorithm reaches a new, unanalyzed state (the selected leaf node), it's time to add it to the map.
+**2.🦚 Expansion: Adding New Knowledge**
+Once the algorithm reaches a new, unanalyzed state (the selected child node), we need to add it to the search tree. The agent expands the tree by creating one or more new child nodes representing possible next moves from this state. This officially adds a new path to the agent's permanent memory structure for future search attempts.
 
-The MCTS agent expands the tree by creating one or more new child nodes representing possible next moves from this state. This officially adds a new path to the agent's permanent memory structure for future searches.
+
 
 
