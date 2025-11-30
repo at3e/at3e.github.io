@@ -19,7 +19,7 @@ Let's first build the MCTS class and construct a wrapper for the reviewer to ing
 
 **The MCTS Node**
 
-The node is the building block of the MCTS search tree. It stores the state and all related data, such as pointer to the parent node, the action taken from the parent to reach the current node, the childern nodes, the value etc. The `is_expanded` checks whether the node has been fully expanded. The `value` method computes the state value (average rewrd). The `best_child` method selects the child node with the highest Upper Confidence Bound (UCB) score (more on UCB [here](https://web.stanford.edu/class/psych209/Readings/SuttonBartoIPRLBook2ndEd.pdf)).
+The node is the fundamental building block of the MCTS search tree. Each node captures the state and  metadata, its parent node, the action that led to it, its children, accumulated value, and more. The `is_expanded` checks whether all possible actions from this state have already been explored. The `value` method computes the state value (average rewrd). The `best_child` method selects the child node with the highest Upper Confidence Bound (UCB) score (more on UCB [here](https://web.stanford.edu/class/psych209/Readings/SuttonBartoIPRLBook2ndEd.pdf)).
 
 ```
 import math
@@ -62,4 +62,8 @@ class Node:
 
 **The MCTS Class**
 
-The MCTS class implements the search algorithm that comprises of four steps. 
+The MCTS class implements the search algorithm that comprises of four step cycle. 
+
+**1.🔎 Selection**
+
+This is where the agent decides where to go next in its current knowledge map (the game tree). It needs to know: should I stick with a move that’s been winning (Exploitation), or try something new that might be even better (Exploration)?MCTS uses the Upper Confidence Bound for Trees (UCT) formula to make this calculated gamble:$$UCB = Q + c \cdot \sqrt{\frac{\ln(N)}{n}}$$
