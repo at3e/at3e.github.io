@@ -66,4 +66,13 @@ The MCTS class implements the search algorithm that comprises of four step cycle
 
 **1.🔎 Selection**
 
-This is where the agent decides where to go next in its current knowledge map (the game tree). It needs to know: should I stick with a move that’s been winning (Exploitation), or try something new that might be even better (Exploration)?MCTS uses the Upper Confidence Bound for Trees (UCT) formula to make this calculated gamble:$$UCB = Q + c \cdot \sqrt{\frac{\ln(N)}{n}}$$
+This is where the agent decides where to go next in its current knowledge map (the game tree). It needs to know: should I stick with a move that’s been winning (Exploitation), or try something new that might be even better (Exploration)?MCTS uses the Upper Confidence Bound for Trees (UCT) formula to make this calculated gamble:
+
+$$UCB = Q + c \cdot \sqrt{\frac{\ln(N)}{n}}$$
+
+**2. Expansion: Adding New Knowledge**
+Once the algorithm reaches a new, unanalyzed state (the selected leaf node), it's time to add it to the map.
+
+The MCTS agent expands the tree by creating one or more new child nodes representing possible next moves from this state. This officially adds a new path to the agent's permanent memory structure for future searches.
+
+
