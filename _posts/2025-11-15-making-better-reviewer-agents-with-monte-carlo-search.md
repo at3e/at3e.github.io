@@ -25,10 +25,9 @@ The node is the fundamental building block of the MCTS search tree. Each node ca
 import math
 import random
 
-
 class Node:
-	def __init__(self, state, parent=None, move=None):
-		self.state = state
+    def __init__(self, state, parent=None, move=None):
+        self.state = state
         self.parent = parent
         self.action = move  # action taken from parent to reach this node
         self.children = []
@@ -40,22 +39,18 @@ class Node:
         return len(self.children) >= self.max_children
 
     def value(self):
-        # average value
         return self.value_sum / self.visits if self.visits > 0 else 0.0
 
     def best_child(self, c_param=1.4):
-        """Select child with highest UCB score."""
         scores = []
         for child in self.children:
             if child.visits == 0:
-                score = float("inf")  # force exploration
+                score = float("inf")
             else:
                 exploit = child.value()
                 explore = c_param * math.sqrt(math.log(self.visits) / child.visits)
                 score = exploit + explore
             scores.append(score)
-
-        # argmax
         best_index = max(range(len(scores)), key=lambda i: scores[i])
         return self.children[best_index]
 ```
@@ -73,6 +68,47 @@ $$UCB = Q + c \cdot \sqrt{\frac{\ln(N)}{n}}$$
 **2.🦚 Expansion: Adding New Knowledge**
 Once the algorithm reaches a new, unanalyzed state (the selected child node), we need to add it to the search tree. The agent expands the tree by creating one or more new child nodes representing possible next moves from this state. This officially adds a new path to the agent's permanent memory structure for future search attempts.
 
+**3. 🎲 Simulation: The Quick-and-Dirty Test**
+Once a new node is added, instead of searching perfectly, the MCTS performs a Simulation or "Rollout".
+Starting from the newly expanded node, the agent plays a quick, often random or heuristic-guided game to the very end (terminal state). This gives a rapid, initial estimate of the node's value.
+
+**4. ⬆️ Backpropagation: Update and Learn**
+The final, crucial step is learning. The result of the Simulation (the reward, win/loss) is propagated back up the search tree, from the newly created node all the way back to the root node.As the result passes through each parent node, two things are updated:Visit Count: How many times this move/state has been analyzed.Value Sum: The total reward/score gathered from all simulations through this node.This update directly affects the $Q$ (Exploitation) score for future searches, ensuring that moves leading to great outcomes become higher priority in the next Selection phase.MCTS is a constant cycle: Select $\to$ Expand $\to$ Simulate $\to$ Backpropagate. It continually refines its map, becoming smarter and more confident with every iteration.
+
+```
+class MCTS:
+	def __init__(self):
+		self.root = Node(0)
+		self.iter = 1000
+
+	def search(self):
+		root = self.root
+		for i in range(self.iter):
+			node = self.select(root)
+			if not node.state.is_terminal():
+                node = self.expand(node)
+			result = self._simulate(node.state)
+			self._backpropagate(node, result)
+
+		return root.best_child(c_param=0).action
+
+	def select(self, node):
+		while not node.state.is_terminal() and node.is_expanded():
+			node = node.best_child
+		return node
+
+	def expand(self, node):
+		for i range(node.max_children - len(node.children)):
+			newNode = Node()
+
+	def simulate(self, node):
+		
 
 
+	def backpropagate(self, node, reward):
+		while node is not None:
+			node.visits += 1
+			node.value += reward
+			node = node.parent
 
+```
