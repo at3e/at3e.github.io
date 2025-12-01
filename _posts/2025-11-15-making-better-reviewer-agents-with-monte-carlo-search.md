@@ -77,38 +77,52 @@ The final, crucial step is learning. The result of the Simulation (the reward, w
 
 ```
 class MCTS:
-	def __init__(self):
-		self.root = Node(0)
-		self.iter = 1000
+    def __init__(self, root_state, iterations=1000):
+        self.root = Node(root_state)
+        self.iter = iterations
 
-	def search(self):
-		root = self.root
-		for i in range(self.iter):
-			node = self.select(root)
-			if not node.state.is_terminal():
+    def search(self):
+        root = self.root
+        for i in range(self.iter):
+            node = self.select(root)
+            if not node.state.is_terminal():
                 node = self.expand(node)
-			result = self._simulate(node.state)
-			self._backpropagate(node, result)
+            result = self.simulate(node.state)
+            self.backpropagate(node, result)
+        return root.best_child(c_param=0).action
 
-		return root.best_child(c_param=0).action
+    def select(self, node):
+        while not node.state.is_terminal() and node.is_expanded():
+            node = node.best_child(c_param=1.4)
+        return node
 
-	def select(self, node):
-		while not node.state.is_terminal() and node.is_expanded():
-			node = node.best_child
-		return node
+    def expand(self, node):
+        actions = node.state.get_legal_actions()
+        for action in actions:
+            if len(node.children) < node.max_children:
+                new_state = node.state.apply_action(action)
+                new_node = Node(new_state, parent=node, move=action)
+                node.children.append(new_node)
+                return new_node
+        return node
 
-	def expand(self, node):
-		for i range(node.max_children - len(node.children)):
-			newNode = Node()
+    def simulate(self, state):
+        current_state = state
+        depth = 0
+        max_depth = 10
+        while not current_state.is_terminal() and depth < max_depth:
+            actions = current_state.get_legal_actions()
+            if not actions:
+                break
+            action = random.choice(actions)
+            current_state = current_state.apply_action(action)
+            depth += 1
+        return current_state.get_reward()
 
-	def simulate(self, node):
-		
-
-
-	def backpropagate(self, node, reward):
-		while node is not None:
-			node.visits += 1
-			node.value += reward
-			node = node.parent
+    def backpropagate(self, node, reward):
+        while node is not None:
+            node.visits += 1
+            node.value_sum += reward
+            node = node.parent
 
 ```
