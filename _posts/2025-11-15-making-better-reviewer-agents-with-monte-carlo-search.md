@@ -168,7 +168,7 @@ from langchain.llms import OpenAI
 
 llm = OpenAI(temperature=0)
 tools = [function_name]
-prompt = "Prompt string"
+prompt = "Initial prompt string"
 agent = gent = create_tool_calling_agent(llm, tools, prompt)
 agent_executor = AgentExecutor(agent=agent, tools=planning_tools, verbose=True)
 
