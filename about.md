@@ -11,7 +11,7 @@ I have always been intrigued by the notion of randomness. My earliest opinion re
 
 **Biodata**
 
-I hold a bachelor's degree from Jadavpur University and a Master's degree from The Indian Institute of Technology Madras(IITM) in Electrical Engineering(EE), with a specialisation in Signal Processing and Communication Systems and a keen interest in solving inverse problems in signal processing. I have worked in speech and image processing domains, and my projects so far involve a combination of signal processing theory and applied ML. During my MS program, I was trained in research practices such as planning an experiment and writing at the [Computational Imaging Lab](https://www.ee.iitm.ac.in/comp_photolab/). I currently work in the EDA industry, where I am primarily responsible for providing optimized solutions for FPGA architecture and placement of large designs.
+I hold a Bachelor's degree and a Master's degree in Electrical Engineering (EE), with a specialization in Signal Processing and Communication Systems, and a keen interest in solving inverse problems in signal processing. Throughout my academic journey, I have worked in the domains of speech and image processing, and my projects have involved a combination of signal processing theory and applied machine learning. I currently work in the EDA industry, where I am primarily responsible for providing solutions for post‑implementation optimizations on FPGA devices. A significant part of my work involves algorithmic design for graphs. Please refer to my publications page for further information.
 
 Apart from research, I enjoy reading crime fiction and playing the violin.
 
