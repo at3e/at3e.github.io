@@ -12,7 +12,9 @@ In this post, we focus on a coder–reviewer workflow and demonstrate how a sear
 The multi-agent code review pipeline operates as follows: the code repository context is retrieved using RAG, the Planner agent breaks the task into executable steps, the Coder generates or updates code for each step, and the Reviewer evaluates the outputs for correctness and quality. The Reviewer then delegates the next iteration back to the Coder. Below is the flow diagram:
 ![Image](/assets/agents/agents-image.001.png){: width="50%" align="center"}
 
-First, I build a local version of this multi-agent code review engine. Please refer to the notebook that I made [here](https://colab.research.google.com/drive/1KvAOeGH-7LaPmkjPHA5d0Fc6tG9JR8kn#scrollTo=788294e1-161a-477e-8081-166b9071b36c) for a basic structure of a multi-agent coder and reviewer. We want to build a tool for the reviewer agent that implements the Monte Carlo Tree Search (MCTS) algorithm. The MCTS adds structure to the LLM decision search space. Let's begin with a brief introduction of MCTS.
+First, I build a local version of this multi-agent code review engine. Please refer to the notebook I created [here](https://colab.research.google.com/drive/1KvAOeGH-7LaPmkjPHA5d0Fc6tG9JR8kn#scrollTo=788294e1-161a-477e-8081-166b9071b36c) for a basic structure of a multi-agent coder and reviewer. Our goal is to build a tool for the reviewer agent that implements the Monte Carlo Tree Search (MCTS) algorithm. MCTS adds structure to the LLM’s decision-making search space.
+
+Let’s begin with a brief introduction to MCTS.
 
 **Monte Carlo Tree Search**
 
