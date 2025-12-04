@@ -142,15 +142,20 @@ In LangChain, a tool is simply a Python function wrapped with metadata(prompts a
 
 At runtime, the agent follows a cycle like this:
 
-Interpret the user’s request.
+- Interpret the user’s request.
+- Look at the available tools and read their docstrings.
+- Decide which tool (if any) is relevant.
+- Call the tool with the required inputs.
+- Use the tool’s output to proceed to the next reasoning step.
 
-Look at the available tools and read their docstrings.
+There are different ways to create Langchain tools. Here, I use the `@tool` decorator. Here's the basic template.
 
-Decide which tool (if any) is relevant.
+```
+@tool("function_name")
+def function_name(args) -> return_type:
+    """Function docstring"""
 
-Call the tool with the required inputs.
-
-Use the tool’s output to proceed to the next reasoning step.
-
-- Item 1
-  - Subitem 1.1
+    # Function definition 
+    
+    return output
+```
