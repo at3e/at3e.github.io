@@ -159,3 +159,18 @@ def function_name(args) -> return_type:
     
     return output
 ```
+
+To make the tool usable for the agent,
+
+```
+from langchain_classic.agents import tool, create_tool_calling_agent, AgentExecutor
+from langchain.llms import OpenAI
+
+llm = OpenAI(temperature=0)
+tools = [function_name]
+prompt = "Prompt string"
+agent = gent = create_tool_calling_agent(llm, tools, prompt)
+agent_executor = AgentExecutor(agent=agent, tools=planning_tools, verbose=True)
+
+agent_executor.invoke({"input": "Task string"}
+```
