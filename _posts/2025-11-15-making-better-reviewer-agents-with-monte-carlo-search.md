@@ -5,15 +5,18 @@ title: Creating better reviewer agents with Monte Carlo search algorithm
 ---
 
 
-AI agents are everywhere, and this blog post aims to keep up with the trend. In the software industry, Large Language Models are increasingly being used as code reviewers, QA assistants, and autonomous agents inside multi-step workflows. Here, we look at a coder–reviewer use case workflow.
-The pipeline retrieves context with RAG, the Planner breaks the task into executable steps, the Coder generates or updates code for each step, and the Reviewer evaluates outputs for correctness and quality. The Reviewer then delegates the next iteration to the Coder. Below is the flow diagram. In this post, we address the issue of LLM inconsistency at the code review stage.
+AI agents are everywhere, and this blog post aims to keep up with the trend. In the software industry, Large Language Models (LLMs) are increasingly being used as code reviewers, QA assistants, and autonomous agents in multi-step workflows. At the heart of these agents lie LLMs with exceptional reasoning abilities. There are several techniques for enhancing LLM reasoning, including prompting-based methods (e.g., Chain-of-Thought), agent-based approaches (e.g., Reason + Act—the foundation of LangChain and LangGraph), and retrieval-based strategies (e.g. RAG combined with reasoning).
+
+In this post, we focus on a coder–reviewer workflow and demonstrate how a search algorithm can serve as a tool for the reviewer LLM.
+
+The multi-agent code review pipeline operates as follows: the code repository context is retrieved using RAG, the Planner agent breaks the task into executable steps, the Coder generates or updates code for each step, and the Reviewer evaluates the outputs for correctness and quality. The Reviewer then delegates the next iteration back to the Coder. Below is the flow diagram:
 ![Image](/assets/agents/agents-image.001.png){: width="50%" align="center"}
 
-First, I build a local version of this multi-agent code review engine. Please refer to the notebook that I made [here](https://colab.research.google.com/drive/1KvAOeGH-7LaPmkjPHA5d0Fc6tG9JR8kn#scrollTo=788294e1-161a-477e-8081-166b9071b36c) for a basic structure of a multi-agent coder and reviewer. Let's begin with what MCTS is.
+First, I build a local version of this multi-agent code review engine. Please refer to the notebook that I made [here](https://colab.research.google.com/drive/1KvAOeGH-7LaPmkjPHA5d0Fc6tG9JR8kn#scrollTo=788294e1-161a-477e-8081-166b9071b36c) for a basic structure of a multi-agent coder and reviewer. We want to build a tool for the reviewer agent that implements the Monte Carlo Tree Search (MCTS) algorithm. The MCTS adds structure to the LLM decision search space. Let's begin with a brief introduction of MCTS.
 
 **Monte Carlo Tree Search**
-The MCTS is a search algorithm that incorporates randomised search to a tree structure and used in decision making.
 
+The MCTS is a search algorithm that incorporates randomised search to a tree structure and used in decision making.
 
 Let's first build the MCTS class and construct a wrapper for the reviewer to ingest.
 
@@ -65,14 +68,17 @@ This is where the agent decides where to go next in its current knowledge map (t
 
 $$UCB = Q + c \cdot \sqrt{\frac{\ln(N)}{n}}$$
 
-**2.🦚 Expansion: Adding New Knowledge**
+**2.🦚 Expansion**
+
 Once the algorithm reaches a new, unanalyzed state (the selected child node), we need to add it to the search tree. The agent expands the tree by creating one or more new child nodes representing possible next moves from this state. This officially adds a new path to the agent's permanent memory structure for future search attempts.
 
-**3. 🎲 Simulation: The Quick-and-Dirty Test**
+**3. 🎲 Simulation**
+
 Once a new node is added, instead of searching perfectly, the MCTS performs a Simulation or "Rollout".
 Starting from the newly expanded node, the agent plays a quick, often random or heuristic-guided game to the very end (terminal state). This gives a rapid, initial estimate of the node's value.
 
-**4. ⬆️ Backpropagation: Update and Learn**
+**4. ⬆️ Backpropagation**
+
 The final, crucial step is learning. The result of the Simulation (the reward, win/loss) is propagated back up the search tree, from the newly created node all the way back to the root node.As the result passes through each parent node, two things are updated:Visit Count: How many times this move/state has been analyzed.Value Sum: The total reward/score gathered from all simulations through this node.This update directly affects the $Q$ (Exploitation) score for future searches, ensuring that moves leading to great outcomes become higher priority in the next Selection phase.MCTS is a constant cycle: Select $\to$ Expand $\to$ Simulate $\to$ Backpropagate. It continually refines its map, becoming smarter and more confident with every iteration.
 
 ```
