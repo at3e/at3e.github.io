@@ -12,7 +12,7 @@ In this post, we focus on a coder–reviewer workflow and demonstrate how a sear
 The multi-agent code review pipeline operates as follows: the code repository context is retrieved using RAG, the Planner agent breaks the task into executable steps, the Coder generates or updates code for each step, and the Reviewer evaluates the outputs for correctness and quality. The Reviewer then delegates the next iteration back to the Coder. Below is the flow diagram:
 ![Image](/assets/agents/agents-image.001.png){: width="50%" align="center"}
 
-First, I build a local version of this multi-agent code review engine. Please refer to the notebook I created [here](https://colab.research.google.com/drive/1KvAOeGH-7LaPmkjPHA5d0Fc6tG9JR8kn#scrollTo=788294e1-161a-477e-8081-166b9071b36c) for a basic structure of a multi-agent coder and reviewer. Our goal is to build a tool for the reviewer agent that implements the Monte Carlo Tree Search (MCTS) algorithm. MCTS adds structure to the LLM’s decision-making search space.
+First, I build a local version of this multi-agent code review engine. Please refer to the [**notebook I created**](https://colab.research.google.com/drive/1KvAOeGH-7LaPmkjPHA5d0Fc6tG9JR8kn#scrollTo=788294e1-161a-477e-8081-166b9071b36c) for a basic structure of a multi-agent coder and reviewer. Our goal is to build a tool for the reviewer agent that implements the Monte Carlo Tree Search (MCTS) algorithm. MCTS adds structure to the LLM’s decision-making search space.
 
 Let’s begin with a brief introduction to MCTS.
 
@@ -181,4 +181,57 @@ Now, that a basic recipe is known, it becomes easy to wrap the MCTS as a tool fo
 - Child Nodes: Each child corresponds to applying a review action (e.g., PASS, FAIL, REQUIRES_REVISION).
 - Leaf Nodes: States where no further critique actions are expanded yet.
 
+Now, to create a class that represents this state node, we have to follow the out schema of the reviewer LLM, i.e. the `CodeCritique` schema defined in [this notebook](https://colab.research.google.com/drive/1KvAOeGH-7LaPmkjPHA5d0Fc6tG9JR8kn#scrollTo=788294e1-161a-477e-8081-166b9071b36c). 
 
+```
+class ReviewerState:
+    def __init__(self, feature_request: str, task_description: str, coder_output: str, depth: int = 0, max_depth: int = 1):
+        self.feature_request = feature_request
+        self.task_description = task_description
+        self.coder_output = coder_output
+        self.depth = depth
+        self.max_depth = max_depth
+
+    def is_terminal(self) -> bool:
+        # Terminal state
+        return self.depth >= self.max_depth
+
+    def get_legal_actions(self) -> List[str]:
+        if self.is_terminal():
+            return []
+        return ["PASS", "FAIL", "REQUIRES_REVISION"]
+
+    def apply_action(self, action: str):
+        # Create a new state representing the critique decision
+        return ReviewerState(
+            self.feature_request,
+            self.task_description,
+            self.coder_output,
+            depth=self.depth + 1,
+            max_depth=self.max_depth
+        )
+
+    def get_reward(self) -> float:
+        if "unique" in self.coder_output.lower():
+            return 1.0 if "PASS" else 0.5
+        return 0.2
+```
+
+The MCTS node now *wraps the* `ReviewerState` class (passed to as the state parameter to `Node` class). 
+
+Finally, we need to create the tool wrapper for MCTS,
+
+```
+@tool("mcts_search")
+def mcts_search(args: dict) -> str:
+    """Run Monte Carlo Tree Search on a dummy state and return the best action."""
+    iterations = args.get("iterations", 20)
+    initial_value = args.get("initial_value", 0)
+
+    root_state = DummyState(value=initial_value, depth=0, max_depth=3)
+    mcts = MCTS(root_state, iterations=iterations)
+    best_action = mcts.search()
+    return f"Best action chosen: {best_action}"
+```
+
+Now, we are ready to pass the tool to the reviewer agent. 
