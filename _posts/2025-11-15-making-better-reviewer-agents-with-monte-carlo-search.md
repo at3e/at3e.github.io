@@ -174,3 +174,16 @@ agent_executor = AgentExecutor(agent=agent, tools=planning_tools, verbose=True)
 
 agent_executor.invoke({"input": "Task string"}
 ```
+
+Now, that a basic recipe is known, it becomes easy to wrap the MCTS as a tool for the reviewer. What remains is to define the nodes and edges of the tree. Each node in the MCTS tree is a review state, containing the essential information of review process at a certain point.
+
+- Root Node:
+    - The initial state containing the feature request, task description, and coder output.
+
+- Child Nodes:
+    - Each child corresponds to applying a review action (e.g., PASS, FAIL, REQUIRES_REVISION).
+
+- Leaf Nodes:
+    - States where no further critique actions are expanded yet.
+
+
