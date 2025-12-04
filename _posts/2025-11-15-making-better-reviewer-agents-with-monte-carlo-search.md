@@ -134,3 +134,23 @@ class MCTS:
             node = node.parent
 
 ```
+
+
+**Langchain Tools**
+
+In LangChain, a tool is simply a Python function wrapped with metadata(prompts and docstrings) that makes it callable by an agent. Tools give agents the ability to perform actions—such as running code, querying a database, calling an API, searching documents, or executing a planner like MCTS—rather than relying solely on text generation. A key detail is that the agent decides which tool to call based on the tool’s docstring metioned in the tool's definition. When the agent receives a task, it reads these docstrings and selects the appropriate tool by matching the task description to the tool capabilities. 
+
+At runtime, the agent follows a cycle like this:
+
+Interpret the user’s request.
+
+Look at the available tools and read their docstrings.
+
+Decide which tool (if any) is relevant.
+
+Call the tool with the required inputs.
+
+Use the tool’s output to proceed to the next reasoning step.
+
+- Item 1
+  - Subitem 1.1
