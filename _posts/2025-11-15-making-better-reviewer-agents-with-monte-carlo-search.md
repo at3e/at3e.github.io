@@ -1,7 +1,7 @@
 ---
 layout: post
 use_math: true
-title: Creating better reviewer agents with Monte Carlo search algorithm
+title: Building a Custom MCTS Search Tool for LangChain Agents in a Multi‑Agent Code Review Workflow
 ---
 
 
