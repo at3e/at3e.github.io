@@ -6,8 +6,7 @@ permalink: /about/
 
 **Motivation**
 
-I have always been intrigued by the notion of randomness. My earliest opinion regarding the concept formed while studying physics in school where it seemed that nature's complex dynamics were dismissed as randomness for all practical purposes. Interestingly, when one discounts the minute details and observes nature on a macroscopic level, the underlying patterns become readily discernable.  In college, I studied electrical signals and systems expanding my understanding of how the state of a system could be deciphered by analysing the outcomes resulting from specific input perturbations. During my senior year of undergrad, I learnt about stochastic processes and how randomness can be harnessed to comprehend the world around us. It all seemed very exciting. 
-
+I have always been intrigued by the notion of randomness. My earliest impressions of the concept formed while studying physics in school, where it often seemed that nature's complex dynamics were dismissed as randomness for all practical purposes. Interestingly, when one discounts the minute details and observes nature on a macroscopic level, the underlying patterns become readily discernible. In college, I studied electrical signals and systems, which expanded my understanding of how the state of a system could be deciphered by analyzing the outcomes resulting from specific input perturbations. During my senior year of undergraduate study, I learned about stochastic processes and how randomness can be harnessed to comprehend the world around us. It was all very exciting, and it sparked a lasting curiosity in me to explore how seemingly chaotic phenomena can reveal order, structure, and meaning when approached with the right mathematical and analytical tools.
 
 **Biodata**
 
