@@ -10,7 +10,7 @@ AI agents are everywhere, and this blog post aims to keep up with the trend. In 
 In this post, we focus on a coder–reviewer workflow and demonstrate how a search algorithm can serve as a tool for the reviewer LLM.
 
 The multi-agent code review pipeline operates as follows: the code repository context is retrieved using RAG, the Planner agent breaks the task into executable steps, the Coder generates or updates code for each step, and the Reviewer evaluates the outputs for correctness and quality. The Reviewer then delegates the next iteration back to the Coder. Below is the flow diagram:
-![Image](/assets/agents/agents-image.001.png){: width="50%" align="center"}
+![Image](/assets/agents/agents-image.001.png){: width="80%" align="center"}
 
 First, I build a local version of this multi-agent code review engine. Please refer to the [**notebook I created**](https://colab.research.google.com/drive/1KvAOeGH-7LaPmkjPHA5d0Fc6tG9JR8kn#scrollTo=788294e1-161a-477e-8081-166b9071b36c) for a basic structure of a multi-agent coder and reviewer. Our goal is to build a tool for the reviewer agent that implements the Monte Carlo Tree Search (MCTS) algorithm. MCTS adds structure to the LLM’s decision-making search space.
 
@@ -148,7 +148,7 @@ At runtime, the agent follows a cycle like this:
 - Call the tool with the required inputs.
 - Use the tool’s output to proceed to the next reasoning step.
 
-There are different ways to create Langchain tools. Here, I use the `@tool` decorator. Here's the basic template.
+There are different ways to go about creating Langchain tools. Here, I use the `@tool` decorator. Here's the basic template.
 
 ```
 @tool("function_name")
